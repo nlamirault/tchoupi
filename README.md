@@ -13,7 +13,27 @@ A REST webservice implemented in differents langages. To verify the webservice:
 Python
 ------
 
+* Install Python tools :
 
+        $ sudo apt-get install python-pip
+		$ sudo pip install virtualenv virtualenvwrapper
+
+* Setup development environment :
+
+        $ . /usr/local/bin/virtualenvwrapper.sh
+		$ mkvirtualenv tchoupi
+		New python executable in tchoupi/bin/python
+		Installing Setuptools........done.
+		Installing Pip...............done.
+		$ pip install -r requirements.txt
+
+* Launch unit tests:
+
+        $ tox (-ecoverage)
+
+* Lanch the REST webservice :
+
+        $ ./runserver.py
 
 GO
 --
