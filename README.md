@@ -59,6 +59,56 @@ GO
         $ ./tchoupi
 
 
+OCaml
+-----
+
+* Install [OCaml](http://ocaml.org/):
+
+        $ sudo apt-get install ocaml ocaml-findlib
+
+* Install [OPam](http://opam.ocamlpro.com/):
+
+        $ sudo add-apt-repository ppa:avsm/ppa
+		$ sudo apt-get update
+		$ sudo apt-get install opam
+
+* Install [OASIS](http://oasis.forge.ocamlcore.org):
+
+        $ sudo apt-get -u install oasis
+
+
+Erlang
+------
+
+* Install [Erlang](http://www.erlang.org/) using [Erlang Solutions](https://www.erlang-solutions.com):
+
+        $ deb http://packages.erlang-solutions.com/debian raring contrib
+		$ wget http://packages.erlang-solutions.com/debian/erlang_solutions.asc
+		$ sudo apt-key add erlang_solutions.asc
+		$ sudo apt-get update
+		$ sudo apt-get install erlang erlang-doc erlang-manpages erlang-mode
+
+* Get dependencies using [Rebar](https://github.com/rebar/rebar):
+
+        $ ./rebar get-deps
+
+* Compile and launch:
+
+        $ make compile start
+
+* From the Erlang shell, type : *application:which_applications().*:
+
+        erl> application:which_applications().
+		[{tchoupi,"The Tchoupi webservice","0.1.0"},
+		{cowboy,"Small, fast, modular HTTP server.","0.8.6"},
+		{ranch,"Socket acceptor pool for TCP protocols.","0.8.4"},
+		{crypto,"CRYPTO version 2","3.0"},
+		{stdlib,"ERTS  CXC 138 10","1.19.3"},
+		{kernel,"ERTS  CXC 138 10","2.16.3"}]
+
+You can use *Ctrl-G q* to exit the Erlang shell.
+
+
 Copyright
 ---------
 
