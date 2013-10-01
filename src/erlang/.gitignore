@@ -1,2 +1,5 @@
 deps/
 ebin/
+.eunit/
+logs/
+test/*.beam

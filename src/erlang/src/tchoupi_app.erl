@@ -21,6 +21,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
+    %%lager:start(),
     Routes = routes(),
     Port = port(),
     Dispatch = cowboy_router:compile(Routes),
@@ -49,6 +50,7 @@ port() ->
     case os:getenv("PORT") of
         false ->
             {ok, Port} = application:get_env(http_port),
+	    %lager:info("Tchoupi is UP."),
             Port;
         Other ->
             Other

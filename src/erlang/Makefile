@@ -6,8 +6,9 @@ all: deps compile
 compile:
 	$(REBAR) compile
 
-test:
-	$(REBAR) skip_deps=true eunit
+test: clean compile
+#	$(REBAR) eunit skip_deps=true
+	$(REBAR) ct skip_deps=true
 
 deps:
 	$(REBAR) get-deps
@@ -17,7 +18,7 @@ app:
 
 clean:
 	$(REBAR) clean
+	rm -fr erl_crash.dump log
 
-start: app
+start: compile
 	erl -pa ebin deps/*/ebin -s ${NAME}
-
