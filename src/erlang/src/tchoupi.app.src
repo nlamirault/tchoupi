@@ -1,0 +1,13 @@
+{application, tchoupi,
+ [
+  {description, "The Tchoupi webservice"},
+  {vsn, "0.1.0"},
+  {registered, [tchoupi_sup]},
+  {applications, [
+                  kernel,
+                  stdlib,
+		  cowboy
+                 ]},
+  {mod, { tchoupi_app, []}},
+  {env, [{http_port, 8085}]}
+ ]}.
