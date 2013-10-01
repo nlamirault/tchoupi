@@ -1,22 +1,22 @@
 NAME=tchoupi
-REBAR=`which rebar || ./rebar`
+REBAR=./rebar
 
 all: deps compile
 
 compile:
-	./rebar compile
+	$(REBAR) compile
 
 test:
-	./rebar skip_deps=true eunit
+	$(REBAR) skip_deps=true eunit
 
 deps:
-	./rebar get-deps
+	$(REBAR) get-deps
 
 app:
-	./rebar compile skip_deps=true
+	$(REBAR) compile skip_deps=true
 
 clean:
-	./rebar clean
+	$(REBAR) clean
 
 start: app
 	erl -pa ebin deps/*/ebin -s ${NAME}
