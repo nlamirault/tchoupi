@@ -35,6 +35,39 @@ Python
 
         $ ./runserver.py
 
+
+Common Lisp
+-----------
+
+* Install [SBCL](http://www.sbcl.org):
+
+        $ sudo apt-get install sbcl
+
+* Install [Quicklisp](http://www.quicklisp.org):
+
+        $ curl -O http://beta.quicklisp.org/quicklisp.lisp
+		$ sbcl --load quicklisp.lisp
+		sbcl> (quicklisp-quickstart:install)
+		sbcl> (ql:quickload "quicklisp-slime-helper")
+
+* Add the project to *quicklisp* local projects:
+
+        $ ln -s $TCHOUPI_HOME/src/commonlisp/*.asd $QUICKLISP_HOME/local-projects/
+
+* Using [SBCL](http://www.sbcl.org) or [SLIME](http://common-lisp.net/project/slime):
+
+        $ (ql:quickload "tchoupi")
+        $ (ql:quickload "tchoupi-test")
+		$ (setq lisp-unit:*print-failures* t)
+		$ (setq lisp-unit:*print-errors* t)
+		$ (setq lisp-unit:*print-summary* t)
+		$ (lisp-unit:run-tests :all :tchoupi-test)
+
+* Launch unit tests:
+
+        $ sbcl --script ./test/runtests.lisp
+
+
 GO
 --
 
@@ -107,6 +140,29 @@ Erlang
 		{kernel,"ERTS  CXC 138 10","2.16.3"}]
 
 You can use *Ctrl-G q* to exit the Erlang shell.
+
+
+Haskell
+-------
+
+* Install [Haskell](http://www.haskell.org):
+
+        $ sudo apt-get install ghc
+
+* Install the [Cabal](http://www.haskell.org/cabal/) package manager:
+
+        $ sudo apt-get install cabal-install
+
+* Install the [Snap](http://snapframework.com) framework :
+
+        $ cabal update
+		$ cabal install snap
+		$ PATH=$HOME/.cabal/bin:$PATH
+
+* Compile and launch :
+
+        $ make install
+		$ $HOME/.cabal/bin/tchoupi -p 8085
 
 
 Copyright
