@@ -1,0 +1,12 @@
+OASISFormat: 0.2
+Name:        tchoupi
+Version:     0.1.0
+Synopsis:    Tchoupi RESTful service
+Authors:     Nicolas Lamirault <nicolas.lamirault@gmail.com>
+License:     LGPL-2.1 with OCaml linking exception
+
+Executable tchoupi
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     tchoupi.ml
+  
