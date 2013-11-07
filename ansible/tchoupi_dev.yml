@@ -1,0 +1,7 @@
+#
+# Ansible configuration for Tchoupi
+#
+
+- include: playbooks/base/base.yml
+- include: playbooks/vim/vim.yml
+

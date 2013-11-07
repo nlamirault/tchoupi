@@ -1,0 +1,27 @@
+- name: Install bashrc
+  copy: src=files/bashrc dest=/home/$user/.bashrc
+
+- name: Install profile
+  copy: src=files/profile dest=/home/$user/.profile
+
+- name: Install environmentrc
+  copy: src=files/environmentrc dest=/home/$user/.environmentrc
+
+- name: Install gitconfig
+  copy: src=files/gitconfig dest=/home/$user/.gitconfig
+
+- name: Install inputrc
+  copy: src=files/inputrc dest=/home/$user/.inputrc
+
+- name: Install tmuxconf-tchoupi
+  copy: src=files/tmux-tchoupi.conf dest=/home/$user/.tmux.conf
+
+- name: Install vimrc
+  copy: src=files/vimrc dest=/home/$user/.vimrc
+
+- name: Create personal configuration directory
+  action: file path=/home/$user/.config state=directory
+
+- name: Create Applications directory
+  command: mkdir /home/$user/Apps creates=/home/$user/Apps
+

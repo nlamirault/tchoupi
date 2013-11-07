@@ -1,0 +1,22 @@
+export LC_ALL=fr_FR.UTF-8
+export LANG=_FR.UTF-8
+
+export HOSTNAME=$(hostname)
+export EDITOR=vim
+export HISTTIMEFORMAT="%h/%d - %H:%M:%S "
+
+alias ll='ls -al'
+alias l='ll -tr' 
+alias clean='find . \( -name ".*~" -o -name "*~" -o -name ".saves*" -o -name ".#*" \) -print -exec /bin/rm {} \;'
+
+export PATH=${HOME}/bin:$PATH
+
+export PATH="$HOME/.cask/bin:$PATH"
+
+export WORKON_HOME=$HOME/.virtualenvs
+alias python_venvwrapper="source /usr/local/bin/virtualenvwrapper.sh"
+
+# Tchoupi
+alias tmux_tchoupi="tmux -f $HOME/.tmux.conf attach"
+alias tchoupi-sbcl='docker run -i -t nlamirault/commonlisp /usr/bin/sbcl'
+
