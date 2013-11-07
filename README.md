@@ -1,17 +1,36 @@
 Tchoupi
 =======
 
-Description
------------
+## Description
 
 A REST webservice implemented in differents langages. To verify the webservice:
 
     $ curl http://localhost:8085
 	$ curl http://localhost:8085/version
 
+## Virtual machine
 
-Python
-------
+You could creates a development environment from scratch:
+
+### Install VirtualBox
+
+See [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+### Install Vagrant and plugins
+
+See [Vagrant](https://www.vagrantup.com)
+
+	$ vagrant plugin install vocker
+
+### Launch
+
+    $ vagrant up
+	$ vagrant ssh
+
+
+## Manual configuration
+
+### Python
 
 * Install Python tools :
 
@@ -36,8 +55,7 @@ Python
         $ ./runserver.py
 
 
-Common Lisp
------------
+### Common Lisp
 
 * Install [SBCL](http://www.sbcl.org):
 
@@ -68,8 +86,7 @@ Common Lisp
         $ sbcl --script ./test/runtests.lisp
 
 
-GO
---
+### GO
 
 * Install [Go](http://golang.org):
 
@@ -92,8 +109,7 @@ GO
         $ ./tchoupi
 
 
-OCaml
------
+### OCaml
 
 * Install [OCaml](http://ocaml.org/):
 
@@ -110,8 +126,7 @@ OCaml
         $ sudo apt-get -u install oasis
 
 
-Erlang
-------
+### Erlang
 
 * Install [Erlang](http://www.erlang.org/) using [Erlang Solutions](https://www.erlang-solutions.com):
 
@@ -142,8 +157,7 @@ Erlang
 You can use *Ctrl-G q* to exit the Erlang shell.
 
 
-Haskell
--------
+### Haskell
 
 * Install [Haskell](http://www.haskell.org):
 
@@ -165,7 +179,6 @@ Haskell
 		$ $HOME/.cabal/bin/tchoupi -p 8085
 
 
-Copyright
----------
+## Copyright
 
 Copyright (c) Nicolas Lamirault <nicolas.lamirault@gmail.com>
