@@ -5,7 +5,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :tchoupi do |tchoupi_config|
     tchoupi_config.vm.box = "raring64"
-    tchoupi_config.vm.box_url = "http://bit.ly/vagrant-lxc-raring64-2013-09-28-"
+    #tchoupi_config.vm.box_url = "http://bit.ly/vagrant-lxc-raring64-2013-09-28-"
+    tchoupi_config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box"
     tchoupi_config.vm.hostname = "Tchoupi"
 
     tchoupi_config.vm.network :private_network, :ip => '10.10.10.10'
@@ -32,10 +33,11 @@ Vagrant.configure("2") do |config|
 
     tchoupi_config.vm.provision :ansible do |ansible|
       ansible.playbook = "ansible/tchoupi_dev.yml"
-      ansible.inventory_file = "ansible/dev_hosts"
-      ansible.options = '-vv'
+      ansible.inventory_path = "ansible/dev_hosts"
+      #ansible.options = '-vv'
     end
 
+    tchoupi_config.vm.synced_folder "src", "/home/vagrant/Apps/tchoupi"
 
   end
 

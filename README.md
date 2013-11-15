@@ -18,7 +18,8 @@ See [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ### Install Vagrant and plugins
 
-See [Vagrant](https://www.vagrantup.com)
+Install [Vagrant](https://www.vagrantup.com) (testted on 1.3.5), and install
+the [Vocker](https://github.com/fgrehm/vocker) plugin :
 
 	$ vagrant plugin install vocker
 
