@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
 
     tchoupi_config.vm.provision :docker do |docker|
       #docker.version = '0.6.3' # default -> :latest
-      docker.pull_images 'nlamirault/commonlisp'
+      docker.pull_images 'nlamirault/commonlisp', 'nlamirault/erlang', 'nlamirault/go', 'nlamirault/haskell'
     end
 
     tchoupi_config.vm.provision :ansible do |ansible|
