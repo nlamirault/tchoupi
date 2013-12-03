@@ -10,15 +10,21 @@
 ;;;; *************************************************************************
 
 
-;; Edit this variable
-(defparameter *quicklisp-homedir*
-  (merge-pathnames "Apps/quicklisp/" (user-homedir-pathname)))
+(in-package :cl-user)
 
-(load (merge-pathnames *quicklisp-homedir* "/setup.lisp"))
+(let ((quicklisp-file
+       (make-pathname :directory (pathname-directory (user-homedir-pathname))
+		      :name "quicklisp/setup" :type "lisp")))
+  (format t "Quiclisp: ~s" quicklisp-file)
+  (load quicklisp-file))
 
 (ql:quickload "tchoupi")
 (ql:quickload "tchoupi-test")
+
 (setq lisp-unit:*print-failures* t)
 (setq lisp-unit:*print-errors* t)
 (setq lisp-unit:*print-summary* t)
+
+(tchoupi:start-server)
 (lisp-unit:run-tests :all :tchoupi-test)
+(tchoupi:stop-server)

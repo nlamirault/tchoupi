@@ -11,14 +11,12 @@
 (in-package :tchoupi-test)
 
 
-
 (defparameter *ut-server* nil)
-
 
 
 (define-test can-retrieve-tchoupi-version
   (assert-equal "0.1.0"
-		(http-request (format nil "http://localhost:~A/version"
-				      *port*)
+		(cdar (http-request (format nil "http://localhost:~A/version"
+					    *port*)
 			      :get
-			      nil)))
+			      nil))))

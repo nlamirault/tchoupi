@@ -4,3 +4,4 @@ tchoupi.egg-info/
 .tox/
 .coverage
 .virtualenvs
+.lispenv/
