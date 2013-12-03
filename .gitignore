@@ -5,6 +5,6 @@ tchoupi.egg-info/
 .coverage
 .virtualenvs
 .lispenv/
-src/python/tchoupi/
+src/python/.venv/
 src/go/.tchoupigo/
 src/go/tchoupi

@@ -1,5 +1,4 @@
-Tchoupi
-=======
+# Tchoupi [![Build Status](https://travis-ci.org/nlamirault/tchoupi.png)](https://travis-ci.org/nlamirault/tchoupi)
 
 ## Description
 
