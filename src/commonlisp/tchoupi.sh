@@ -16,6 +16,5 @@ cp addons/init.lisp $TEST_ENV
 cd $TEST_ENV
 wget -q http://beta.quicklisp.org/quicklisp.lisp -O quicklisp.lisp
 sbcl --script init.lisp
-#sbcl --script ../update-deps.lisp
 ln -s $PWD/.. ~/quicklisp/local-projects/tchoupi
 sbcl --script ../test/runtests.lisp

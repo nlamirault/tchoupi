@@ -3,7 +3,13 @@
 
 TCHOUPI_HOME=`pwd`
 
-echo "Launch Common Lisp version of Tchoupi"
+echo "----- Python version of Tchoupi -----"
+cd src/python
+./tchoupi.sh
+cd $TCHOUPI_HOME
+
+echo "----- Common Lisp version of Tchoupi -----"
 cd src/commonlisp
 ./tchoupi.sh
+cd $TCHOUPI_HOME
 

@@ -5,3 +5,4 @@ tchoupi.egg-info/
 .coverage
 .virtualenvs
 .lispenv/
+src/python/tchoupi/
