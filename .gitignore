@@ -8,3 +8,4 @@ tchoupi.egg-info/
 src/python/.venv/
 src/go/.tchoupigo/
 src/go/tchoupi
+src/haskell/log/
