@@ -1,0 +1,34 @@
+(* Script to compile Tchoupi with ocp-build. *)
+
+(* begin *)
+(*   generated = true *)
+(*   begin objects "easy-format-object" *)
+(*      dirname = "%{easy-format_FULL_DST_DIR}%" *)
+(*      files = [ "easy_format.ml" ] *)
+(*      requires = [ ] *)
+(*   end *)
+
+(*   begin objects "yojson-object" *)
+(*      dirname = "%{yojson_FULL_DST_DIR}%" *)
+(*      files = [ "yojson.ml" ] *)
+(*      requires = [ "biniou" "easy-format-object" ] *)
+(*   end *)
+
+(*   begin objects "menhirLib-object" *)
+(*      dirname = "%{menhirLib_FULL_DST_DIR}%" *)
+(*      files = [ "menhirLib.ml" ] *)
+(*      requires = [ ] *)
+(*   end *)
+(* end *)
+
+(* Ok, now, the real description of Tchoupi *)
+
+begin program "ocamltchoupi"
+  dirname += "src" (* sources are in sub-directory "src" *)
+
+   files = [
+    "tchoupi.ml"
+  ]
+
+  requires = [ "cohttp" "ounit" ]
+end
