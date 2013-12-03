@@ -13,3 +13,7 @@ cd src/commonlisp
 ./tchoupi.sh
 cd $TCHOUPI_HOME
 
+echo "----- GO version of Tchoupi -----"
+cd src/go
+./tchoupi.sh
+cd $TCHOUPI_HOME
