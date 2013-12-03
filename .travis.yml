@@ -2,7 +2,8 @@ script: tchoupi.sh
 before_install:
     - sudo apt-get update
     - sudo apt-get install build-essential
-    - sudo apt-get install python-dev python-pip virtualenv virtualenvwrapper
+    - sudo apt-get install python-dev python-pip
+    - sudo pip install virtualenv virtualenvwrapper
     - sudo apt-get install sbcl
     - sudo apt-get install golang golang-go golang-doc golang-src
     - sudo apt-get install ocaml ocaml-findlib
