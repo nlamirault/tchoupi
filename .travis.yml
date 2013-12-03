@@ -1,0 +1,15 @@
+script: tchoupi.sh
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install build-essential
+    - sudo apt-get install python-dev python-pip virtualenv virtualenvwrapper
+    - sudo apt-get install sbcl
+    - sudo apt-get install golang golang-go golang-doc golang-src
+    - sudo apt-get install ocaml ocaml-findlib
+    - sudo add-apt-repository ppa:avsm/ppa
+    - sudo apt-get update
+    - sudo apt-get install opam
+    - sudo apt-get install ghc
+    - sudo apt-get install cabal-install
+    - sudo cabal update
+    - sudo cabal install snap
