@@ -6,3 +6,5 @@ tchoupi.egg-info/
 .virtualenvs
 .lispenv/
 src/python/tchoupi/
+src/go/.tchoupigo/
+src/go/tchoupi
