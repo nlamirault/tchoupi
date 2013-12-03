@@ -23,3 +23,11 @@ echo "---------------------------------"
 cd src/go
 ./tchoupi.sh
 cd $TCHOUPI_HOME
+
+echo "------------------------------------"
+echo "----- OCaml version of Tchoupi -----"
+echo "------------------------------------"
+cd src/ocaml
+./tchoupi.sh
+cd $TCHOUPI_HOME
+

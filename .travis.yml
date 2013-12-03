@@ -6,3 +6,6 @@ before_install:
     - sudo pip install virtualenv virtualenvwrapper
     - sudo apt-get install sbcl
     - sudo apt-get install golang golang-go golang-doc golang-src
+    - sudo add-apt-repository -y ppa:avsm/ppa
+    - sudo apt-get update
+    - sudo apt-get install m4 ocaml opam
