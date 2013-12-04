@@ -31,3 +31,5 @@ cd src/ocaml
 ./tchoupi.sh
 cd $TCHOUPI_HOME
 
+echo "--- Tchoupi tests done ---"
+
