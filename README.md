@@ -1,4 +1,6 @@
-# Tchoupi [![Build Status](https://travis-ci.org/nlamirault/tchoupi.png)](https://travis-ci.org/nlamirault/tchoupi)
+# Tchoupi 
+
+[![Build Status](https://travis-ci.org/nlamirault/tchoupi.png)](https://travis-ci.org/nlamirault/tchoupi)
 
 ## Description
 
