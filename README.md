@@ -1,6 +1,6 @@
-# Tchoupi 
+# Tchoupi
 
-[![Build Status](https://travis-ci.org/nlamirault/tchoupi.png)](https://travis-ci.org/nlamirault/tchoupi)
+[![Build Status](http://img.shields.io/travis/nlamirault/tchoupi.svg)](https://travis-ci.org/nlamirault/tchoupi)
 
 ## Description
 
@@ -179,6 +179,13 @@ You can use *Ctrl-G q* to exit the Erlang shell.
 
         $ make install
 		$ $HOME/.cabal/bin/tchoupi -p 8085
+
+
+### Scheme
+
+* Install [Racket](http://www.racket-lang.org):
+
+        $ sudo apt-get install racket
 
 
 ## Copyright
