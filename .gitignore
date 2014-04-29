@@ -9,3 +9,5 @@ src/python/.venv/
 src/go/.tchoupigo/
 src/go/tchoupi
 src/haskell/log/
+src/commonlisp/.lispenv/
+src/clojure/target/

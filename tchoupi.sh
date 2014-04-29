@@ -22,12 +22,27 @@ red='\e[0;31m'
 green='\e[0;0;32m'
 nocolor='\e[0m' # No Color
 
-HOME=`dirname "$0"`
+SCRIPT=`readlink -f $0`
+HOME=`dirname $SCRIPT`
+
+tchoupi_python() {
+    printf " - Python : "
+    cd src/python
+    ./tchoupi.sh &> /tmp/tchoupi_python.logs
+    grep -q "congratulations :)" /tmp/tchoupi_python.logs
+    if [ $? = 0 ]
+    then
+        printf "${green} [OK]${nocolor}\n"
+    else
+        printf "${red} [KO]${nocolor}\n"
+    fi
+    cd $HOME
+}
 
 tchoupi_golang() {
-    printf "${green}  - GO : ${nocolor}"
+    printf " - GO :"
     cd src/go
-    ./tchoupi.sh 2>&1 > /tmp/tchoupi_go.logs
+    ./tchoupi.sh &> /tmp/tchoupi_go.logs
     grep -q ok /tmp/tchoupi_go.logs
     if [ $? = 0 ]
     then
@@ -40,7 +55,10 @@ tchoupi_golang() {
 
 
 main() {
-    echo -e "${green}-- Tchoupi --- ${nocolor}"
+    echo -e "-----------------"
+    echo -e "---- Tchoupi ----"
+    echo -e "-----------------"
+    tchoupi_python
     tchoupi_golang
 }
 

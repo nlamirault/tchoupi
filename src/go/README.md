@@ -6,8 +6,8 @@
 
         $ export GOPATH=$HOME/Apps/golang
 		$ export PATH=$PATH:$GOPATH/bin
-		$ mkdir $GOPATH/src/github.com/nlamirault/
-		$ ln -s `pwd`/tchoupi $GOPATH/src
+		$ mkdir -p $GOPATH/src/github.com/nlamirault/
+		$ ln -s `pwd`/github.com/nlamirault/tchoupi/ $GOPATH/src/github.com/nlamirault/
 
 * Build and launch unit tests:
 
