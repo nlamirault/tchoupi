@@ -8,7 +8,6 @@ VERSION=$(shell cat github.com/nlamirault/tchoupi/consts.go | perl -n -e'/Versio
 init:
 	mkdir -p $(GOPATH)/src/
 	cp -r ./github.com $(GOPATH)/src/github.com
-	# cp -r ./Godeps/_workspace/src/ $(GOPATH)/src/
 	go get github.com/tools/godep
 
 deps:
