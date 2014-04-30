@@ -7,7 +7,7 @@
 You could validate each version using a script :
 
 ```bash
-$ tchoupi
+$ .tchoupi.sh
 -----------------
 ---- Tchoupi ----
 -----------------

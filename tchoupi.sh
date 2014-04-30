@@ -37,16 +37,17 @@ display_waiting() {
     done
 }
 
-
 tchoupi_check_status() {
-    logs=$1
-    token=$2
+    pid=$1
+    logs=$2
+    token=$3
     #echo "Check $token into $logs"
+    display_waiting $pid
     grep -q "$token" $logs
-    tchoupi_status $?
+    tchoupi_display_status $?
 }
 
-tchoupi_status() {
+tchoupi_display_status() {
     result=$1
     if [ $result = 0 ]
     then
@@ -56,14 +57,11 @@ tchoupi_status() {
     fi
 }
 
-
 tchoupi_python() {
     printf " - Python : "
     cd src/python
     ./tchoupi.sh &> /tmp/tchoupi_python.logs &
-    pid=$!
-    display_waiting $pid
-    tchoupi_check_status /tmp/tchoupi_python.logs "congratulations"
+    tchoupi_check_status $! /tmp/tchoupi_python.logs "congratulations"
     cd $HOME
 }
 
@@ -71,9 +69,7 @@ tchoupi_golang() {
     printf " - GO : "
     cd src/go
     ./tchoupi.sh &> /tmp/tchoupi_go.logs &
-    pid=$!
-    display_waiting $pid
-    tchoupi_check_status /tmp/tchoupi_go.logs "ok"
+    tchoupi_check_status $! /tmp/tchoupi_go.logs "ok"
     cd $HOME
 }
 
@@ -81,9 +77,7 @@ tchoupi_commonlisp() {
     printf " - Common Lisp : "
     cd src/commonlisp
     ./ci/tchoupi-ci.sh &> /tmp/tchoupi_cl.logs &
-    pid=$!
-    display_waiting $pid
-    tchoupi_check_status /tmp/tchoupi_cl.logs " | 0 failed"
+    tchoupi_check_status $! /tmp/tchoupi_cl.logs " | 0 failed"
     cd $HOME
 }
 

@@ -4,10 +4,11 @@ tchoupi.egg-info/
 .tox/
 .coverage
 .virtualenvs
-.clenv/
+.cache/
+.subversion/
 src/python/.venv/
 src/go/.tchoupigo/
 src/go/tchoupi
 src/haskell/log/
-src/commonlisp/.lispenv/
+src/commonlisp/.clenv/
 src/clojure/target/
