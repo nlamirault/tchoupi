@@ -20,12 +20,34 @@
 
 TCHOUPI_HOME=`pwd`/.tchoupigo
 rm -fr $TCHOUPI_HOME
+rm -f ./tchoupi
 mkdir $TCHOUPI_HOME
+
 export GOPATH=$TCHOUPI_HOME
+#export GOPATH=`pwd`/Godeps/_workspace:$GOPATH
 export PATH=$PATH:$GOPATH/bin
-cp -r ./github.com $GOPATH/src/
-cd $GOPATH/src
-cp -r ../../github.com .
-cd ../..
-make
-make test
+
+
+tchoupi_init() {
+    mkdir -p $GOPATH/src/
+    cp -r ./github.com $GOPATH/src/github.com
+    cp -r ./Godeps/_workspace/src/* $GOPATH/src/
+}
+
+
+tchoupi_get_deps() {
+    echo "Get dependencies"
+    go get github.com/tools/godep
+    godep get github.com/nlamirault/tchoupi
+}
+
+tchoupi_validate() {
+    echo "Validate Tchoupi"
+    make
+    make test
+}
+
+
+tchoupi_init
+tchoupi_get_deps
+tchoupi_validate

@@ -1,0 +1,10 @@
+{
+    "ImportPath": "github.com/nlamirault/tchoupi",
+    "GoVersion": "go1.2.1",
+    "Deps": [
+        {
+	    "ImportPath": "github.com/go-martini/martini",
+	    "Rev": "de643861770082784ad14cba4557ad68568dcc7b"
+	}
+    ]
+}

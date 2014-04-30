@@ -1,18 +1,10 @@
 # Tchoupi GO
 
-* Install [Go](http://golang.org):
-
-* Configure environment:
-
-        $ export GOPATH=$HOME/Apps/golang
-		$ export PATH=$PATH:$GOPATH/bin
-		$ mkdir -p $GOPATH/src/github.com/nlamirault/
-		$ ln -s `pwd`/github.com/nlamirault/tchoupi/ $GOPATH/src/github.com/nlamirault/
+* Install [Go](http://golang.org/doc/install):
 
 * Build and launch unit tests:
 
-        $ make
-		$ make test
+        $ ./tchoupi.sh
 
 * Lanch the REST webservice :
 
