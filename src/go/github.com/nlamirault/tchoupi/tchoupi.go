@@ -18,51 +18,14 @@
 package main
 
 import (
-	//	"log"
+	"log"
 	"net/http"
-	"regexp"
-	"strings"
 
 	"github.com/go-martini/martini"
+	"github.com/martini-contrib/encoder"
 )
 
 var m *martini.Martini
-
-// The regex to check for the requested format (allows an optional trailing
-// slash).
-//var rxExt = regexp.MustCompile(`(\.(?:xml|text|json))\/?$`)
-var rxExt = regexp.MustCompile(`(\.(?:json))\/?$`)
-
-// MapEncoder intercepts the request's URL, detects the requested format,
-// and injects the correct encoder dependency for this request. It rewrites
-// the URL to remove the format extension, so that routes can be defined
-// without it.
-func MapEncoder(c martini.Context, w http.ResponseWriter, r *http.Request) {
-	// Get the format extension
-	matches := rxExt.FindStringSubmatch(r.URL.Path)
-	ft := ".json"
-	if len(matches) > 1 {
-		// Rewrite the URL without the format extension
-		l := len(r.URL.Path) - len(matches[1])
-		if strings.HasSuffix(r.URL.Path, "/") {
-			l--
-		}
-		r.URL.Path = r.URL.Path[:l]
-		ft = matches[1]
-	}
-	// Inject the requested encoder
-	switch ft {
-	// case ".xml":
-	// 	c.MapTo(xmlEncoder{}, (*Encoder)(nil))
-	// 	w.Header().Set("Content-Type", "application/xml")
-	// case ".text":
-	// 	c.MapTo(textEncoder{}, (*Encoder)(nil))
-	// 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	default:
-		c.MapTo(jsonEncoder{}, (*Encoder)(nil))
-		w.Header().Set("Content-Type", "application/json")
-	}
-}
 
 func main() {
 	m = martini.New()
@@ -70,7 +33,11 @@ func main() {
 	// Setup middleware
 	m.Use(martini.Recovery())
 	m.Use(martini.Logger())
-	m.Use(MapEncoder)
+	//m.Use(MapEncoder)
+	m.Use(func(c martini.Context, w http.ResponseWriter) {
+		c.MapTo(encoder.JsonEncoder{}, (*encoder.Encoder)(nil))
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	})
 
 	// Setup routes
 	r := martini.NewRouter()
@@ -79,6 +46,9 @@ func main() {
 	// Add the router action
 	m.Action(r.Handle)
 
-	http.ListenAndServe(":5000", m)
+	log.Println("Waiting for connections...")
+	if err := http.ListenAndServe(":5000", m); err != nil {
+		log.Fatal(err)
+	}
 	m.Run()
 }

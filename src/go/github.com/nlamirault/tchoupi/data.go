@@ -22,7 +22,7 @@ import (
 )
 
 type Version struct {
-	name string `json:"name" xml:"name"`
+	name string `json:"name"`
 }
 
 func (v *Version) String() string {

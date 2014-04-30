@@ -3,7 +3,7 @@ export HOME=$(CURDIR)
 export GOPATH=$(HOME)/.tchoupigo
 
 PKG = tchoupi Makefile
-VERSION=$(shell cat github.com/nlamirault/tchoupi/consts.go | perl -n -e'/Version = "(.*?)"/ && print $$1')
+VERSION=$(shell cat github.com/nlamirault/tchoupi/settings.go | perl -n -e'/Version = "(.*?)"/ && print $$1')
 
 init:
 	mkdir -p $(GOPATH)/src/
@@ -12,6 +12,10 @@ init:
 
 deps:
 	$(GOPATH)/bin/godep restore
+
+update-deps:
+	$(GOPATH)/bin/godep get github.com/nlamirault/tchoupi
+	$(GOPATH)/bin/godep save github.com/nlamirault/tchoupi
 
 build: init deps
 	cp -r ./github.com/nlamirault $(GOPATH)/src/github.com
