@@ -4,10 +4,17 @@
 
 ## Description
 
-A REST webservice implemented in differents langages. To verify the webservice:
+You could validate each version using a script :
 
-	$ curl http://localhost:8085
-	$ curl http://localhost:8085/version
+```bash
+$ tchoupi
+-----------------
+---- Tchoupi ----
+-----------------
+ - Python : ... [OK]
+ - GO : .. [OK]
+ - Common Lisp : .................................. [OK]
+```
 
 ## Virtual machine
 

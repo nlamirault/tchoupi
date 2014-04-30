@@ -25,31 +25,65 @@ nocolor='\e[0m' # No Color
 SCRIPT=`readlink -f $0`
 HOME=`dirname $SCRIPT`
 
-tchoupi_python() {
-    printf " - Python : "
-    cd src/python
-    ./tchoupi.sh &> /tmp/tchoupi_python.logs
-    grep -q "congratulations :)" /tmp/tchoupi_python.logs
-    if [ $? = 0 ]
+SLEEP=1 # 0.8
+
+display_waiting() {
+    pid=$1
+    #echo $pid
+    while kill -0 $pid &>/dev/null
+    do
+        echo -n "."
+        sleep $SLEEP
+    done
+}
+
+
+tchoupi_check_status() {
+    logs=$1
+    token=$2
+    #echo "Check $token into $logs"
+    grep -q "$token" $logs
+    tchoupi_status $?
+}
+
+tchoupi_status() {
+    result=$1
+    if [ $result = 0 ]
     then
         printf "${green} [OK]${nocolor}\n"
     else
         printf "${red} [KO]${nocolor}\n"
     fi
+}
+
+
+tchoupi_python() {
+    printf " - Python : "
+    cd src/python
+    ./tchoupi.sh &> /tmp/tchoupi_python.logs &
+    pid=$!
+    display_waiting $pid
+    tchoupi_check_status /tmp/tchoupi_python.logs "congratulations"
     cd $HOME
 }
 
 tchoupi_golang() {
-    printf " - GO :"
+    printf " - GO : "
     cd src/go
-    ./tchoupi.sh &> /tmp/tchoupi_go.logs
-    grep -q ok /tmp/tchoupi_go.logs
-    if [ $? = 0 ]
-    then
-        printf "${green} [OK]${nocolor}\n"
-    else
-        printf "${red} [KO]${nocolor}\n"
-    fi
+    ./tchoupi.sh &> /tmp/tchoupi_go.logs &
+    pid=$!
+    display_waiting $pid
+    tchoupi_check_status /tmp/tchoupi_go.logs "ok"
+    cd $HOME
+}
+
+tchoupi_commonlisp() {
+    printf " - Common Lisp : "
+    cd src/commonlisp
+    ./ci/tchoupi-ci.sh &> /tmp/tchoupi_cl.logs &
+    pid=$!
+    display_waiting $pid
+    tchoupi_check_status /tmp/tchoupi_cl.logs " | 0 failed"
     cd $HOME
 }
 
@@ -60,6 +94,7 @@ main() {
     echo -e "-----------------"
     tchoupi_python
     tchoupi_golang
+    tchoupi_commonlisp
 }
 
 
