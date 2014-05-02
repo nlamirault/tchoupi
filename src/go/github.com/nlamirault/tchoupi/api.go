@@ -19,13 +19,14 @@ package main
 
 import (
 	//"fmt"
+	"github.com/martini-contrib/encoder"
 	"log"
 	"net/http"
 )
 
 // Return the API version
-func GetVersion(r *http.Request, enc Encoder) (int, string) {
+func GetVersion(r *http.Request, enc encoder.Encoder) (int, []byte) {
 	log.Printf("[GET] API Version")
 	api_version := &Version{TchoupiVersion}
-	return http.StatusOK, Must(enc.Encode(api_version))
+	return http.StatusOK, encoder.Must(enc.Encode(api_version))
 }
