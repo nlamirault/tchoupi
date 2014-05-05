@@ -7,7 +7,7 @@ tchoupi.egg-info/
 .cache/
 .subversion/
 src/python/.venv/
-src/go/.tchoupigo/
+src/go/.goenv/
 src/go/tchoupi
 src/haskell/log/
 src/commonlisp/.clenv/

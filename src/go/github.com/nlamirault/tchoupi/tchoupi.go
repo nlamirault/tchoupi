@@ -25,30 +25,25 @@ import (
 	"github.com/martini-contrib/encoder"
 )
 
-var m *martini.Martini
-
-func main() {
-	m = martini.New()
-
-	// Setup middleware
-	m.Use(martini.Recovery())
-	m.Use(martini.Logger())
-	//m.Use(MapEncoder)
+func Server() *martini.Martini {
+	m := martini.New()
+	route := martini.NewRouter()
+	// map json encoder
 	m.Use(func(c martini.Context, w http.ResponseWriter) {
 		c.MapTo(encoder.JsonEncoder{}, (*encoder.Encoder)(nil))
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	})
 
-	// Setup routes
-	r := martini.NewRouter()
-	r.Get(`/version`, GetVersion)
+	route.Get(`/version`, GetVersion)
+	m.Action(route.Handle)
 
-	// Add the router action
-	m.Action(r.Handle)
+	return m
+}
 
+func main() {
+	server := Server()
 	log.Println("Waiting for connections...")
-	if err := http.ListenAndServe(":5000", m); err != nil {
+	if err := http.ListenAndServe(":5000", server); err != nil {
 		log.Fatal(err)
 	}
-	m.Run()
 }

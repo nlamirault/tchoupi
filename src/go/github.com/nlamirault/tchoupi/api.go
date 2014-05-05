@@ -18,7 +18,6 @@
 package main
 
 import (
-	//"fmt"
 	"github.com/martini-contrib/encoder"
 	"log"
 	"net/http"

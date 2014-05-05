@@ -22,9 +22,9 @@ import (
 )
 
 type Version struct {
-	name string `json:"name"`
+	Name string `json:"version"`
 }
 
 func (v *Version) String() string {
-	return fmt.Sprintf("%s", v.name)
+	return fmt.Sprintf("%s", v.Name)
 }

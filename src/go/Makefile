@@ -29,6 +29,11 @@ test: build
 	@echo "Running tests"
 	go test github.com/nlamirault/tchoupi
 
+coverage: build
+	go test github.com/nlamirault/tchoupi -covermode=count -coverprofile=count.out
+	#go tool cover -html=count.out -o coverage.html
+	go tool cover -func=count.out
+
 package: $(PKG)
 	mkdir -p tchoupi-$(VERSION)
 	cp -r $(PKG) tchoupi-$(VERSION)/
@@ -39,6 +44,7 @@ clean:
 	rm -f tchoupi-$(VERSION).tar.gz
 	rm -rf tchoupi-$(VERSION)/
 	rm -f ./tchoupi
+	rm count.out coverage.html
 	rm -fr $(GOPATH)
 
 .PHONY: clean
