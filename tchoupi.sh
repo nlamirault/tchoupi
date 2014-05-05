@@ -68,8 +68,9 @@ tchoupi_python() {
 tchoupi_golang() {
     printf " - GO : "
     cd src/go
-    ./tchoupi.sh &> /tmp/tchoupi_go.logs &
-    tchoupi_check_status $! /tmp/tchoupi_go.logs "ok"
+    #./tchoupi.sh &> /tmp/tchoupi_go.logs &
+    make clean test &> /tmp/tchoupi_go.logs &
+    tchoupi_check_status $! /tmp/tchoupi_go.logs "ok  	github.com/nlamirault/tchoupi"
     cd $HOME
 }
 

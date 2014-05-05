@@ -44,7 +44,7 @@ clean:
 	rm -f tchoupi-$(VERSION).tar.gz
 	rm -rf tchoupi-$(VERSION)/
 	rm -f ./tchoupi
-	rm count.out coverage.html
+	rm -f count.out coverage.html
 	rm -fr $(GOPATH)
 
 .PHONY: clean
