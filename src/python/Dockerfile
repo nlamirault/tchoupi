@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y wget python git nginx supervisord
+RUN apt-get install -y wget python git nginx supervisor
 RUN apt-get clean
 
 # Install PIP

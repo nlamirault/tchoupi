@@ -13,6 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+all: build
+
+commonlisp:
+	sudo docker build -t nlamirault/tchoupi_commonlisp src/commonlisp
 
 python:
 	sudo docker build -t nlamirault/tchoupi_python src/python
