@@ -43,7 +43,7 @@ func Server() *martini.Martini {
 func main() {
 	server := Server()
 	log.Println("Waiting for connections...")
-	if err := http.ListenAndServe(":5000", server); err != nil {
+	if err := http.ListenAndServe(":8085", server); err != nil {
 		log.Fatal(err)
 	}
 }
