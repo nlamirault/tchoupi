@@ -4,7 +4,6 @@
 # Copyright (c) Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 import site
-import sys
 
 
 site.addsitedir('~/venvs/local/lib/python2.7/site-packages')
