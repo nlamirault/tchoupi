@@ -1,5 +1,6 @@
 # Tchoupi
 
+[![License GPL 3][badge-license]][COPYING]
 [![Build Status](http://img.shields.io/travis/nlamirault/tchoupi.svg)](https://travis-ci.org/nlamirault/tchoupi)
 
 ## Description
@@ -41,6 +42,37 @@ the [Vocker](https://github.com/fgrehm/vocker) plugin :
 
 See each README.md in [src](src)
 
-## Copyright
 
-Copyright (c) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+## Support
+
+Feel free to ask question or make suggestions in our [Issue Tracker][].
+
+
+## License
+
+Scame is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+Tchoupi is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+See [COPYING][] for the complete license.
+
+
+## Changelog
+
+A changelog is available [here](ChangeLog.md).
+
+
+## Contact
+
+Nicolas Lamirault <nicolas.lamirault@gmail.com>
+
+[Tchoupi]: https://github.com/nlamirault/tchoupi
+[Docker]: https://www.docker.io
+[COPYING]: https://github.com/nlamirault/tchoupi/blob/master/COPYING
+[badge-license]: https://img.shields.io/badge/license-GPL_3-green.svg?style=flat
+[Issue tracker]: https://github.com/nlamirault/tchoupi/issues

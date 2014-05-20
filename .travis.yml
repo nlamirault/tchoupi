@@ -1,4 +1,4 @@
-script: ./travis.sh
+script: ./tchoupi.sh
 before_install:
     - sudo apt-get update
     - sudo apt-get install build-essential
