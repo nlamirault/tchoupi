@@ -8,7 +8,7 @@ RUN apt-get clean
 # Install PIP
 RUN wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py && python get-pip.py
 
-RUN mkdir /opt
+RUN mkdir -p /opt
 ADD tchoupi /opt/tchoupi
 
 # Nginx

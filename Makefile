@@ -21,4 +21,7 @@ commonlisp:
 python:
 	sudo docker build -t nlamirault/tchoupi_python src/python
 
-build: python
+go:
+	sudo docker build -t nlamirault/tchoupi_go src/go
+
+build: commonlisp python go

@@ -10,7 +10,7 @@ init:
 	mkdir -p $(GOPATH)/src/
 	cp -r ./github.com $(GOPATH)/src/github.com
 	@echo "Building godep..."
-	go get github.com/tools/godep
+	@env go get github.com/tools/godep
 	@env GOPATH="${GOPATH}" go get ${GOBUILD_OPTS} github.com/tools/godep
 
 setup: init
@@ -23,16 +23,16 @@ update-deps:
 
 build: init setup
 	cp -r ./github.com/nlamirault $(GOPATH)/src/github.com
-	go build github.com/nlamirault/tchoupi
+	@env go build github.com/nlamirault/tchoupi
 
 test: build
 	@echo "Running tests"
-	go test github.com/nlamirault/tchoupi
+	@env go test github.com/nlamirault/tchoupi
 
 coverage: build
-	go test github.com/nlamirault/tchoupi -covermode=count -coverprofile=count.out
+	@env go test github.com/nlamirault/tchoupi -covermode=count -coverprofile=count.out
 	#go tool cover -html=count.out -o coverage.html
-	go tool cover -func=count.out
+	@env go tool cover -func=count.out
 
 package: $(PKG)
 	mkdir -p tchoupi-$(VERSION)
