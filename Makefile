@@ -13,15 +13,42 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-all: build
+APP = tchoupi
+
+NAMESPACE = tchoupi
+
+NO_COLOR=\033[0m
+OK_COLOR=\033[32;01m
+ERROR_COLOR=\033[31;01m
+WARN_COLOR=\033[33;01m
+
+DOCKER=docker
+MACHINE_VERSION=0.0.1
+MACHINE_URL=https://github.com/docker/machine/releases/download
+
+all: help
+
+help:
+	@echo -e "$(OK_COLOR) ==== $(APP) ====$(NO_COLOR)"
+	@echo -e "$(WARN_COLOR)- init$(NO_COLOR)   : initialize environment"
+	@echo -e "$(WARN_COLOR)- build$(NO_COLOR)  : build the Docker images"
+
+init:
+	@echo -e "$(OK_COLOR)[$(APP)] Download Docker machine$(NO_COLOR)"
+	wget $(MACHINE_URL)/$(MACHINE_VERSION)/linux -O machine
+	chmod +x ./machine
+	./machine -d virtualbox tchoupi
 
 commonlisp:
-	sudo docker build -t nlamirault/tchoupi_commonlisp src/commonlisp
+	@echo -e "$(OK_COLOR)[$(APP)] Build Common Lisp$(NO_COLOR)"
+	@sudo $(DOCKER) build -t $(NAMESPACE)/commonlisp src/commonlisp
 
 python:
-	sudo docker build -t nlamirault/tchoupi_python src/python
+	@echo -e "$(OK_COLOR)[$(APP)] Build Python$(NO_COLOR)"
+	@sudo $(DOCKER) build -t $(NAMESPACE)/python src/python
 
 go:
-	sudo docker build -t nlamirault/tchoupi_go src/go
+	@echo -e "$(OK_COLOR)[$(APP)] Build GO$(NO_COLOR)"
+	@sudo $(DOCKER) build -t $(NAMESPACE)/go src/go
 
 build: commonlisp python go

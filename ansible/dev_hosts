@@ -1,6 +1,0 @@
-[vagrant_dev]
-10.10.10.10
-
-[vagrant_dev:vars]
-user= vagrant
-
