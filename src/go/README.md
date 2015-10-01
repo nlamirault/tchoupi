@@ -1,11 +1,13 @@
-# Tchoupi GO
+# Tchoupi golang
 
-* Install [Go](http://golang.org/doc/install):
+A simple webservice in [go](https://golang.org)
 
-* Build and launch unit tests:
+* Install [go](https://golang.org/doc/install)
 
-        $ ./tchoupi.sh
+* Build application :
 
-* Lanch the REST webservice :
+        $ make build
 
-        $ ./tchoupi
+* Run the application :
+
+        $ bin/tchoupi
