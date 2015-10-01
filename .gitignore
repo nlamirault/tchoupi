@@ -1,14 +1,23 @@
 .vagrant/
-*.pyc
-tchoupi.egg-info/
-.tox/
-.coverage
-.virtualenvs
 .cache/
-.subversion/
+
+# python
 src/python/.venv/
-src/go/.goenv/
-src/go/tchoupi
+*.pyc
+.tox/
+
+# haskell
 src/haskell/log/
+
+# commonlisp
 src/commonlisp/.clenv/
+
+# clojure
 src/clojure/target/
+
+# go
+src/go/bin/
+src/go/pkg/
+
+# rust
+src/rust/target/
