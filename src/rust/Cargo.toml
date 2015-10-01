@@ -1,0 +1,12 @@
+[package]
+name = "tchoupi"
+version = "0.1.0"
+readme = "README.md"
+documentation = "http://github.com/nlamirault/tchoupi"
+repository = "https://github.com/nlamirault/tchoupi"
+authors = ["Nicolas Lamirault <nicolas.lamirault@gmail.com>"]
+
+[dependencies]
+iron="0.2.2"
+router = "0.0.15"
+rustc-serialize = "0.3.16"
