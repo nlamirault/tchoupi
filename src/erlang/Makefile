@@ -1,24 +1,6 @@
-NAME=tchoupi
-REBAR=./rebar
+PROJECT = tchoupi_app
 
-all: deps compile
+DEPS = cowboy lager epgsql jiffy
+dep_cowboy = git https://github.com/ninenines/cowboy master
 
-compile:
-	$(REBAR) compile
-
-test: clean compile
-#	$(REBAR) eunit skip_deps=true
-	$(REBAR) ct skip_deps=true
-
-deps:
-	$(REBAR) get-deps
-
-app:
-	$(REBAR) compile skip_deps=true
-
-clean:
-	$(REBAR) clean
-	rm -fr erl_crash.dump log
-
-start: compile
-	erl -pa ebin deps/*/ebin -s ${NAME}
+include erlang.mk

@@ -1,5 +1,5 @@
 %%% @author Nicolas Lamirault <nicolas.lamirault@gmail.com>
-%%% @copyright (C) 2013, Nicolas Lamirault
+%%% @copyright (C) 2013, 2015, Nicolas Lamirault
 %%% @doc
 %%%s
 %%% @end
@@ -7,6 +7,8 @@
 %% ex: ts=4 sw=4 ft=erlang et
 
 -module(tchoupi_app).
+
+-author('Nicolas Lamirault <nicolas.lamirault@gmail.com>')
 
 -behaviour(application).
 
