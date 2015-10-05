@@ -23,3 +23,8 @@ src/go/pkg/
 
 # rust
 src/rust/target/
+
+# erlang
+src/erlang/.erlang.mk/
+src/erlang/_rel/
+src/erlang/erlang.d
