@@ -1,5 +1,5 @@
 %%% @author Nicolas Lamirault <nicolas.lamirault@gmail.com>
-%%% @copyright (C) 2013, Nicolas Lamirault
+%%% @copyright (C) 2013, 2015, Nicolas Lamirault <nicolas.lamirault@gmail.com>
 %%% @doc
 %%%
 %%% @end
