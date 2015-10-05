@@ -28,3 +28,4 @@ src/rust/target/
 src/erlang/.erlang.mk/
 src/erlang/_rel/
 src/erlang/erlang.d
+src/erlang/relx
