@@ -9,7 +9,7 @@
   :version "0.5.0"
   :author "Nicolas Lamirault <nicolas.lamirault@gmail.com>"
   :license "GPL-2"
-  :depends-on (:ningle)
+  :depends-on (:hunchentoot :ningle)
   :components ((:module "src"
                 :components
                 ((:file "package")
