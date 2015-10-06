@@ -1,4 +1,4 @@
-;; Copyright (C) 2014  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2014, 2015  Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -15,35 +15,13 @@
 
 (in-package #:tchoupi)
 
+(defvar *app* (make-instance 'ningle:<app>))
 
-(defvar *port* 8085)
+(setf (ningle:route *app* "/")
+      "Welcome to Tchoupi!")
 
-(defvar *server* nil)
-
-(defparameter *version* "0.1.0")
-
-
-;; API
-
+(setf (ningle:route *app* "/version" :method :GET)
+      "{\"version\": \"1\"}")
 
 (defun start-server ()
-  "Start the web service."
-  (format t "** Starting hunchentoot @ :~A~%"  *port*)
-  ;; (setq *server*
-  ;; 	(hunchentoot:start
-  ;; 	 (make-instance 'hunchentoot:easy-acceptor
-  ;; 			:port *port*))))
-  (setq *server*
-	(make-instance 'hunchentoot:easy-acceptor :port *port*))
-  (hunchentoot:start *server*))
-
-(defun stop-server ()
-  "Stop the web service."
-  (hunchentoot:stop *server*))
-
-
-;; REST
-
-
-(define-easy-handler (front-page :uri "/version") ()
-  (format nil "{\"version\": \"~A\"}" *version*))
+  (clack:clackup *app*))

@@ -1,24 +1,30 @@
-;; Copyright (C) 2014  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;;;; -*- Mode: LISP; Syntax: ANSI-Common-Lisp; Base: 10 -*-
 
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+(in-package :cl-user)
+(defpackage tchoupi-asd
+  (:use :cl :asdf))
+(in-package :tchoupi-asd)
 
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-(asdf:defsystem #:tchoupi
-  :serial t
-  :description "Tchoupi REST webservice"
+(defsystem tchoupi
+  :version "0.5.0"
   :author "Nicolas Lamirault <nicolas.lamirault@gmail.com>"
   :license "GPL-2"
-  :depends-on (#:hunchentoot)
-  :components ((:module :src
-			:components ((:file "package")
-				     (:file "tchoupi" :depends-on ("package"))))))
+  :depends-on (:ningle)
+  :components ((:module "src"
+                :components
+                ((:file "package")
+                 (:file "tchoupi" :depends-on ("package")))))
+  :description "Tchoupi webservice."
+  :long-description
+  #.(with-open-file (stream (merge-pathnames
+                             #p"README.md"
+                             (or *load-pathname* *compile-file-pathname*))
+                            :if-does-not-exist nil
+                            :direction :input)
+      (when stream
+        (let ((seq (make-array (file-length stream)
+                               :element-type 'character
+                               :fill-pointer t)))
+          (setf (fill-pointer seq) (read-sequence seq stream))
+          seq)))
+  :in-order-to ((test-op (test-op tchoupi-test))))
