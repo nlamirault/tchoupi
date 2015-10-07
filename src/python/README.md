@@ -6,12 +6,13 @@
 
 * Setup development environment :
 
-        $ . /usr/local/bin/virtualenvwrapper.sh
-		$ mkvirtualenv tchoupi
-		New python executable in tchoupi/bin/python
-		Installing Setuptools........done.
-		Installing Pip...............done.
+        $ wget https://bootstrap.pypa.io/get-pip.py
+        $ sudo python get-pip.py
+        $ sudo pip install virtualenv
+        $ virtualenv venv
+        $ . venv/bin/activate
 		$ pip install -r requirements.txt
+   		$ pip install -r requirements-dev.txt
 
 * Launch unit tests:
 

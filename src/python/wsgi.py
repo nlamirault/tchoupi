@@ -3,11 +3,8 @@
 # -*- Mode: Python; tab-width: 4 -*-
 # Copyright (c) Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
-import site
+from tchoupi import application
 
-
-site.addsitedir('~/venvs/local/lib/python2.7/site-packages')
-
-from tchoupi import app
-
-app.run(host="0.0.0.0", port=8085)
+if __name__ == "__main__":
+    app = application.creates_app()
+    app.run()
