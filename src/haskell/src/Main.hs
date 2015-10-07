@@ -1,30 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import           Control.Applicative
-import           Snap.Core
-import           Snap.Util.FileServe
-import           Snap.Http.Server
+-- import Data.Monoid
+import Web.Spock.Safe
 
 main :: IO ()
-main = quickHttpServe site
-
-site :: Snap ()
-site =
-    ifTop (writeBS "Tchoupi") <|>
-    route [
-      -- ("foo", writeBS "bar")
-      -- , ("echo/:echoparam", echoHandler)
-      ("version", versionHandler)
-      ] <|>
-    dir "static" (serveDirectory ".")
-
--- echoHandler :: Snap ()
--- echoHandler = do
---     param <- getParam "echoparam"
---     maybe (writeBS "must specify echo/param in URL")
---           writeBS param
-
-versionHandler :: Snap ()
-versionHandler = do
-  writeBS "{\"version\" : \"0.1.0\"}"
+main =
+  runSpock 8080 $ spockT id $
+  do get root $
+       text "Welcome to Tchoupi!"
+       -- get ("version" <//> var) $ \name ->
+       --     text ("Hello " <> name <> "!")
+     get ("version") $
+       text "{\"version\": \"1\"}"

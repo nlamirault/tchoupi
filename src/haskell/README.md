@@ -4,13 +4,12 @@
 
 * Install the [Cabal](http://www.haskell.org/cabal/) package manager:
 
-        $ sudo apt-get install cabal-install
-
-* Install the [Snap](http://snapframework.com) framework :
+* Install [Stack](https://www.stackage.org/)  :
 
         $ cabal update
-		$ cabal install snap
-		$ PATH=$HOME/.cabal/bin:$PATH
+        $ wget https://www.stackage.org/lts/cabal.config
+        $ cabal update
+        $ cabal install
 
 * Compile and launch :
 

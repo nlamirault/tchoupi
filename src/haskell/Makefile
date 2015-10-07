@@ -1,41 +1,53 @@
+# Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+APP="tchoupi"
+
 CABAL=cabal
-EXPORTS=PATH=$$PATH:cabal-dev/bin
-CONFIG_OPTS=
-.PHONY: test
 
-all: build
+SHELL = /bin/bash
 
-build: configure src/*.hs
-	$(EXPORTS) $(CABAL) build
+NO_COLOR=\033[0m
+OK_COLOR=\033[32;01m
+ERROR_COLOR=\033[31;01m
+WARN_COLOR=\033[33;01m
 
-install: build
-	cabal install
+all: help
 
-uninstall:
-	ghc-pkg unregister tchoupi
+help:
+	@echo -e "$(OK_COLOR)==== $(APP) [$(VERSION)] ====$(NO_COLOR)"
+	@echo -e "$(WARN_COLOR)init$(NO_COLOR)  :  Install requirements"
+	@echo -e "$(WARN_COLOR)build$(NO_COLOR) :  Build project"
+	@echo -e "$(WARN_COLOR)run$(NO_COLOR) :  Run application"
 
-sdist: configure
-	$(CABAL) sdist
+.PHONY: init
+init:
+	$(CABAL) install --constraint 'mono-traversable >= 0.9' stack
+	$(CABAL) install
 
-configure: tchoupi.cabal install_dependencies
-	$(CABAL) configure $(CONFIG_OPTS)
+.PHONY: configure
+configure:
+	$(CABAL) configure
 
-install_dependencies:
-	$(CABAL) install --only-dependencies
+.PHONY: build
+build: configure
+	$(CABAL) build
 
-test: configure_tests
-	PATH=$$PATH:cabal-dev/bin $(CABAL) build
-	$(CABAL) test --show-details=always
+.PHONY: run
+run: build
+	dist/build/tchoupi/tchoupi
 
-configure_tests:
-	$(CABAL) configure --enable-tests $(CONFIG_OPTS)
-
-docs:
-	$(CABAL) haddock
-
+.PHONY: clean
 clean:
 	$(CABAL) clean
-	rm -f **/*.{o,hi} **/**/*.{o,hi}
-
-tags: src/**/*.hs
-	hasktags -c -o tags src
