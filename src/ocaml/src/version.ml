@@ -12,25 +12,4 @@
 (* See the License for the specific language governing permissions and *)
 (* limitations under the License. *)
 
-(* open Core_kernel.Std *)
-open Opium.Std
-
-type version_json = {
-  name: string;
-}
-
-let json_of_version { name  } =
-  let open Ezjsonm in
-  dict [ "name", (string name) ]
-
-let print_version =
-  get "/version"
-      begin fun req ->
-      let resp = { name = "1"; } in
-      `Json (resp |> json_of_version |> Ezjsonm.wrap) |> respond'
-      end
-
-let _ =
-  App.empty
-  |> print_version
-  |> App.run_command
+let version = "0.1.0"

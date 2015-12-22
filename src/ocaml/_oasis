@@ -1,0 +1,14 @@
+OASISFormat: 0.4
+Name:        tchoupi
+Version:     0.1.0
+Synopsis:    Tchoupi webservice
+Authors:     Nicolas Lamirault
+License:     Apache-2.0
+Plugins:     META (0.4)
+
+Executable tchoupi
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     tchoupi.ml
+  BuildDepends:
+    opium,

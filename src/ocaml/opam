@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "nicolas.lamirault@gmail.com"
+authors:     "Nicolas Lamirault"
+homepage:    "https://github.com/nlamirault/tchoupi/"
+dev-repo:    "https://github.com/nlamiraut/tchoupi.git"
+bug-reports: "https://github.com/nlamirault/tchoupi/issues/"
+
+license: ""
+build: [
+  ["./configure" "--prefix" prefix]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "tchoupi"]
+depends: [
+  "ocamlfind"
+  "opium"
+]
+available: [ocaml-version >= "4.00.1"]
