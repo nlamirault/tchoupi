@@ -12,11 +12,10 @@
 (* See the License for the specific language governing permissions and *)
 (* limitations under the License. *)
 
-open Opium.Std
 
-let _ =
-  App.empty
-  |> Tchoupi_routes.route_help
-  |> Tchoupi_routes.route_version
-  |> App.run_command
-  |> ignore
+let tests = [
+    "api" , Test_api.suite;
+  ]
+
+
+let () = Alcotest.run "tchoupi" tests

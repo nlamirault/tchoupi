@@ -1,0 +1,3 @@
+PKG opium alcotest
+S src/ test/
+B _build/**

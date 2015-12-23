@@ -12,4 +12,9 @@
 (* See the License for the specific language governing permissions and *)
 (* limitations under the License. *)
 
-let version = "0.1.0"
+(** a JSON type for version **)
+type version_json
+
+val route_version: Opium.App.t -> Opium.App.t
+
+val route_help: Opium.Std.App.t -> Opium.App.t

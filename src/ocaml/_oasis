@@ -6,9 +6,30 @@ Authors:     Nicolas Lamirault
 License:     Apache-2.0
 Plugins:     META (0.4)
 
+
+Library tchoupi
+  Path:              src
+  BuildTools:        ocamlbuild
+  Findlibname:       tchoupi
+  Modules:           Tchoupi, Tchoupi_version, Tchoupi_routes
+  BuildDepends:      opium
+
 Executable tchoupi
-  Path:       src
-  BuildTools: ocamlbuild
-  MainIs:     tchoupi.ml
-  BuildDepends:
-    opium,
+  Path:         src
+  BuildTools:   ocamlbuild
+  MainIs:       tchoupi.ml
+  BuildDepends: opium
+
+Executable test_tchoupi
+  Build$:           flag(tests)
+  Path:             test
+  BuildTools:       ocamlbuild
+  MainIs:           test.ml
+  CompiledObject:   best
+  Install:          false
+  BuildDepends:     alcotest, tchoupi
+
+Test test_tchoupi
+  Run$:             flag(tests)
+  WorkingDirectory: test
+  Command:          $test_tchoupi -q

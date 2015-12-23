@@ -12,11 +12,30 @@
 (* See the License for the specific language governing permissions and *)
 (* limitations under the License. *)
 
+open Printf
+
 open Opium.Std
 
-let _ =
-  App.empty
-  |> Tchoupi_routes.route_help
-  |> Tchoupi_routes.route_version
-  |> App.run_command
-  |> ignore
+open Tchoupi_version
+
+
+type version_json = {
+  name: string;
+}
+
+
+let json_of_version { name  } =
+  let open Ezjsonm in
+  dict [ "name", (string name) ]
+
+
+let route_version =
+  get "/version"
+      begin fun req ->
+      let resp = { name = Tchoupi_version.version; } in
+      `Json (resp |> json_of_version |> Ezjsonm.wrap) |> respond'
+      end
+
+
+let route_help =
+  get "/" (fun req -> `String "Welcome to Tchoupi" |> respond')
