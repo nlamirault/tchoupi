@@ -8,11 +8,14 @@
 (defsystem tchoupi-test
   :defsystem-depends-on (:prove-asdf)
   :depends-on (:tchoupi
+               :drakma
+               :cl-json
                :prove)
   :components ((:module "t"
                 :components
                 ((:file "package")
-                 (:test-file "tchoupi" :depends-on ("package")))))
+                 (:file "http" :depends-on ("package"))
+                 (:test-file "web-test" :depends-on ("http")))))
   :perform (test-op :after (op c)
                     (funcall (intern #.(string :run-test-system) :prove) c)
                     (asdf:clear-system c)))

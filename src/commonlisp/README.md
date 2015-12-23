@@ -1,25 +1,39 @@
 # Tchoupi Common Lisp
 
-* Install [SBCL](http://www.sbcl.org):
+## Required softwares
 
-* Install [quicklisp](https://www.quicklisp.org/)
+You will need :
 
-* Start a Common Lisp REPL :
+* [SBCL][]
+* [Quicklisp][]
 
-         CL-USER> (push "you/directory/tchoupi/src/commonlisp/" asdf:*central-registry*)
-         CL-USER> (ql:quickload "tchoupi")
-         [...]
-         CL-USER> (tchoupi:start-server)
-         To load "clack-handler-hunchentoot":
-         Load 1 ASDF system:
-         clack-handler-hunchentoot
-         ; Loading "clack-handler-hunchentoot"
-         [package clack.handler.hunchentoot]
-         Hunchentoot server is started.
-         Listening on localhost:5000.
-         #<CLACK.HANDLER:<HANDLER> {1009320BE3}>
+## Installation
 
-* Check website
+* Install tools and dependencies :
 
-        $ curl http://localhost:5000/version
-        {"version": "1"}
+        $ make init
+        $ make deps
+
+* Make binary :
+
+        $ make binary
+
+* Launch server:
+
+        $ roswell/tchoupi
+
+## Development
+
+* Install [roswell][] to setup the Common Lisp environment and install
+your Common Lisp implementation using it.:
+
+        $ make init
+        $ ros install sbcl
+
+* Install dependencies :
+
+        $ make deps
+
+* Launch unit tests :
+
+        $ make test

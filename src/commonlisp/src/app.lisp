@@ -12,31 +12,9 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(in-package #:tchoupi)
 
+;; Start Tchoupi
 
-(defparameter *handler* nil
-  "The Tchoupi web server.")
-
-(defparameter *port* 8082
-  "Default port for the webservice.")
-
-
-(defun install-routes (app)
-  (setf (ningle:route app "/")
-        "Welcome to Tchoupi!")
-  (setf (ningle:route app "/version" :method :GET)
-        "{\"version\": \"1\"}")
-  )
-
-(defun start-server ()
-  (let ((app (make-instance 'ningle:<app>)))
-    (install-routes app)
-    (setf *handler*
-          (clack:clackup app
-                         ;;:server :hunchentoot
-                         :port *port*))))
-
-(defun stop-server ()
-  (clack:stop *handler*)
-  (setf *handler* nil))
+(push *default-pathname-defaults* asdf:*central-registry*)
+(ql:quickload :tchoupi :slient t)
+(tchoupi:start-server)

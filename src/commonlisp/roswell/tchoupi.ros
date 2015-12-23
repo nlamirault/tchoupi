@@ -1,0 +1,32 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+
+(push *default-pathname-defaults* asdf:*central-registry*)
+(ql:quickload :tchoupi) ; :silent t)
+
+
+(defun help ()
+  (format t "~&tchoupi web services.
+~&Options:
+
+      --help
+        Shows this message.
+"
+          ))
+
+
+(defun main (&rest argv)
+  ;; (declare (ignorable argv))
+
+  ;; (format t "~%argv: ~a~%" argv)
+  ;; (format t "~%path: ~a~%" *default-pathname-defaults*)
+
+  (when ;;(or (null argv)
+      (equal (first argv) "--help")
+    (help)
+    (uiop:quit -1))
+
+  (funcall (intern (string :start-server) :tchoupi)))
