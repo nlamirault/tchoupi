@@ -31,7 +31,7 @@ func init() {
 	flag.BoolVar(&version, "version", false, "print version and exit")
 	flag.BoolVar(&version, "v", false, "print version and exit (shorthand)")
 	flag.BoolVar(&debug, "d", false, "run in debug mode")
-	flag.StringVar(&port, "port", "5000", "port to use")
+	flag.StringVar(&port, "port", "8081", "port to use")
 	flag.Parse()
 }
 
