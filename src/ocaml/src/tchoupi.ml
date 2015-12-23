@@ -13,6 +13,7 @@
 (* limitations under the License. *)
 
 (* open Core_kernel.Std *)
+
 open Opium.Std
 
 type version_json = {
@@ -30,7 +31,12 @@ let print_version =
       `Json (resp |> json_of_version |> Ezjsonm.wrap) |> respond'
       end
 
+let print_help =
+  get "/" (fun req -> `String "Welcome to Tchoupi" |> respond')
+
 let _ =
   App.empty
+  |> print_help
   |> print_version
   |> App.run_command
+  |> ignore
