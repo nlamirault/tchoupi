@@ -11,3 +11,8 @@ A simple webservice in [rust](https://www.rust-lang.org/)
 * Run the application :
 
         $ make run
+
+* Check web service :
+
+        $ curl http://localhost:5000/version
+        {"version":"1"}
