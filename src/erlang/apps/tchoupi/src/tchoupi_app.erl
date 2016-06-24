@@ -29,13 +29,6 @@ start(_StartType, _StartArgs) ->
     Port = application:get_env(tchoupi, http_port, 8080),
     lager:info("Starting router on ~p", [Port]),
     router:start(Port),
-    %% {ok, _} = cowboy:start_http(
-    %%             tchoupi_server,
-    %%             100,
-    %%             [{port, Port}],
-    %%             [{env, [{dispatch, dispatch('_')}]},
-    %%              {max_keepalive, 5},
-    %%              {timeout, 50000}]),
     lager:info("Starting supervisor."),
     tchoupi_sup:start_link().
 
