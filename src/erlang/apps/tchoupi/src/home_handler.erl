@@ -12,25 +12,25 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
+-module(home_handler).
 
-{application, tchoupi,
- [
-  {description, "The Tchoupi web service"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {mod, { tchoupi_app, []}},
-  {applications, [
-                  kernel,
-                  stdlib,
-                  cowboy
-                 ]},
-  {env, [
-         {environment, dev}
-        ]},
-  {modules, []},
-  {maintainers, ["Nicolas Lamirault <nicolas.lamirault@gmail.com>"]},
-  {licenses, ["Apache 2.0"]},
-  {links, [
-           {"https://github.com/nlamirault/tchoupi"}
-          ]}
- ]}.
+-behaviour(cowboy_http_handler).
+
+-export([init/3]).
+-export([handle/2]).
+-export([terminate/3]).
+
+init(_, Req, Opts) ->
+    {ok, Req, Opts}.
+
+
+handle(Req, State) ->
+    {ok, Req2} = cowboy_req:reply(200,
+                                  [{<<"content-type">>, <<"text/html">>}],
+                                  "<html><body><p>Welcome to Tchoupi.</p></body></html>",
+                                  Req),
+    {ok, Req2, State}.
+
+
+terminate(_Reason, _Req, _State) ->
+  ok.

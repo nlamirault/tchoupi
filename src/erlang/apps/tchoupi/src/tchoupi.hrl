@@ -12,25 +12,7 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
+-define(VERSION, "0.1.0")
 
-{application, tchoupi,
- [
-  {description, "The Tchoupi web service"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {mod, { tchoupi_app, []}},
-  {applications, [
-                  kernel,
-                  stdlib,
-                  cowboy
-                 ]},
-  {env, [
-         {environment, dev}
-        ]},
-  {modules, []},
-  {maintainers, ["Nicolas Lamirault <nicolas.lamirault@gmail.com>"]},
-  {licenses, ["Apache 2.0"]},
-  {links, [
-           {"https://github.com/nlamirault/tchoupi"}
-          ]}
- ]}.
+-define(JSON_CT_HEADER, {<<"content-type">>, <<"application/json">>}).
+-define(JSON_CONTENT_TYPE, { <<"application">>, <<"json">>, []}).

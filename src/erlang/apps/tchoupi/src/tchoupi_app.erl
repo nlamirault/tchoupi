@@ -12,33 +12,35 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
-
-%%%-------------------------------------------------------------------
-%% @doc tchoupi public API
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(tchoupi_app).
 
 -behaviour(application).
 
 %% Application callbacks
--export([start/2, stop/1]).
+-export([start/2
+        ,stop/1]).
 
 %%====================================================================
 %% API
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+    Port = application:get_env(tchoupi, http_port, 8080),
     Dispatch = cowboy_router:compile([
-		{'_', [
-			{"/version", version_handler, []}
-		]}
-	]),
-	{ok, _} = cowboy:start_clear(http, 100, [{port, 8080}], #{
-		env => #{dispatch => Dispatch}
-	}),
+          {'_', [
+                 {"/", home_handler, []},
+                 {"/version", version_handler, []}
+                ]}
+    ]),
+    {ok, _} = cowboy:start_http(
+                       tchoupi_listener, 100,
+                       [{port, Port}],
+                       [{env, [{dispatch, Dispatch}]},
+                        {max_keepalive, 5},
+                        {timeout, 50000}]),
+    io:format("~n~n[tchoupi]: Started the serverat port ~p.~n~n", [Port]),
     tchoupi_sup:start_link().
+
 
 %%--------------------------------------------------------------------
 stop(_State) ->

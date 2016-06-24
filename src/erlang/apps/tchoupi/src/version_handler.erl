@@ -12,22 +12,29 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
-
-%% @doc API Version handler.
 -module(version_handler).
 
--export([init/2]).
--export([content_types_provided/2]).
--export([hello_to_json/2]).
+-behaviour(cowboy_http_handler).
 
-init(Req, Opts) ->
-	{cowboy_rest, Req, Opts}.
+%% -include("tchoupi.hrl").
 
-content_types_provided(Req, State) ->
-	{[
-		{<<"application/json">>, hello_to_json}
-	], Req, State}.
+-export([init/3]).
+%% -export([content_types_provided/2]).
+-export([handle/2]).
+-export([terminate/3]).
 
-hello_to_json(Req, State) ->
-	Body = <<"{\"version\": \"1\"}">>,
-	{Body, Req, State}.
+
+init(_, Req, Opts) ->
+    {ok, Req, Opts}.
+
+
+handle(Req, State) ->
+    {ok, Req2} = cowboy_req:reply(200,
+                                  [{<<"content-type">>, <<"application/json">>}],
+                                  "{\"version\": \"1\"}",
+                                  Req),
+    {ok, Req2, State}.
+
+
+terminate(_Reason, _Req, _State) ->
+    ok.

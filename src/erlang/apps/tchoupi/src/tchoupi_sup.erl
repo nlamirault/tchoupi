@@ -12,12 +12,6 @@
 %% See the License for the specific language governing permissions and
 %% limitations under the License.
 
-
-%%%-------------------------------------------------------------------
-%% @doc tchoupi top level supervisor.
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(tchoupi_sup).
 
 -behaviour(supervisor).

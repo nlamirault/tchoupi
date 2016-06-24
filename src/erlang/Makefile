@@ -24,8 +24,8 @@ ERROR_COLOR=\033[31;01m
 WARN_COLOR=\033[33;01m
 
 VERSION=$(shell \
-        grep "const Version" $(SRC)/version.go \
-        |awk -F'=' '{print $$2}' \
+        grep "VERSION" apps/tchoupi/src/tchoupi.hrl \
+        |awk -F',' '{print $$2}' \
         |sed -e "s/[^0-9.]//g" \
 	|sed -e "s/ //g")
 
@@ -35,7 +35,10 @@ all: help
 help:
 	@echo -e "$(OK_COLOR)==== $(APP) [$(VERSION)] ====$(NO_COLOR)"
 	@echo -e "$(WARN_COLOR)init$(NO_COLOR)     :  Install requirements"
-
+	@echo -e "$(WARN_COLOR)deps$(NO_COLOR)     :  Install dependencies"
+	@echo -e "$(WARN_COLOR)build$(NO_COLOR)    :  Compile project"
+	@echo -e "$(WARN_COLOR)run$(NO_COLOR)      :  Run application"
+	@echo -e "$(WARN_COLOR)test$(NO_COLOR)     :  Launch unit tests"
 
 .PHONY: init
 init:
