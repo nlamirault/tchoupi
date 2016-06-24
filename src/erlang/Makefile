@@ -46,9 +46,11 @@ init:
 	wget https://s3.amazonaws.com/rebar3/rebar3 -O ./rebar3 && \
                 chmod +x ./rebar3
 
+.PHONY: deps
 deps:
 	@echo -e "$(OK_COLOR)[$(APP)] Retrieve dependencies$(NO_COLOR)"
 	@$(REBAR) deps
+	@$(REBAR) vendor store
 
 .PHONY: build
 build: deps
