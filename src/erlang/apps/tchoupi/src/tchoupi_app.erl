@@ -27,26 +27,44 @@
 start(_StartType, _StartArgs) ->
     lager:start(),
     Port = application:get_env(tchoupi, http_port, 8080),
-    Dispatch = cowboy_router:compile([
-          {'_', [
-                 {"/", home_handler, []},
-                 {"/version", version_handler, []}
-                ]}
-    ]),
     {ok, _} = cowboy:start_http(
-                       tchoupi_listener, 100,
-                       [{port, Port}],
-                       [{env, [{dispatch, Dispatch}]},
-                        {max_keepalive, 5},
-                        {timeout, 50000}]),
+                tchoupi_server,
+                100,
+                [{port, Port}],
+                [{env, [{dispatch, dispatch('_')}]},
+                 {max_keepalive, 5},
+                 {timeout, 50000}]),
     lager:info("Starting Tchoupi on ~p", [Port]),
     tchoupi_sup:start_link().
 
 
-%%--------------------------------------------------------------------
 stop(_State) ->
     ok.
 
 %%====================================================================
 %% Internal functions
 %%====================================================================
+
+dispatch(Host) ->
+  Routes = routes(),
+  lager:info("Routes: ~p", [routes()]),
+  cowboy_router:compile([{Host, Routes}]).
+
+routes() ->
+  api_routes() ++
+  system_routes().
+
+api_routes() ->
+    version("v1", [
+                   {"/hello/:name", description_handler, []}
+                  ]).
+
+version(Version, Routes) when is_list(Routes) ->
+  [version(Version, Route) || Route <- Routes];
+
+version(Version, {Route, Handler, Options}) ->
+  {"/api/" ++ Version ++ Route, Handler, Options}.
+
+system_routes() ->
+  [{"/", home_handler, []},
+   {"/api/version", version_handler, []}].
