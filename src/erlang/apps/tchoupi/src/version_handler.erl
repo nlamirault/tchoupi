@@ -29,6 +29,9 @@ init(_, Req, Opts) ->
 
 
 handle(Req, State) ->
+    io:format("[tchoupi] Get version~n"),
+    %% Body = jsx:encode([{<<"version">>,<<"1">>}]),
+    %% {Body, Req, State}.
     {ok, Req2} = cowboy_req:reply(200,
                                   [{<<"content-type">>, <<"application/json">>}],
                                   "{\"version\": \"1\"}",
