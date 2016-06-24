@@ -25,6 +25,7 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+    lager:start(),
     Port = application:get_env(tchoupi, http_port, 8080),
     Dispatch = cowboy_router:compile([
           {'_', [
@@ -38,7 +39,7 @@ start(_StartType, _StartArgs) ->
                        [{env, [{dispatch, Dispatch}]},
                         {max_keepalive, 5},
                         {timeout, 50000}]),
-    io:format("~n~n[tchoupi]: Started the serverat port ~p.~n~n", [Port]),
+    lager:info("Starting Tchoupi on ~p", [Port]),
     tchoupi_sup:start_link().
 
 

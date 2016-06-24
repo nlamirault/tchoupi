@@ -29,7 +29,7 @@ init(_, Req, Opts) ->
 
 
 handle(Req, State) ->
-    io:format("[tchoupi] Get version~n"),
+    lager:info("Get version"),
     %% Body = jsx:encode([{<<"version">>,<<"1">>}]),
     %% {Body, Req, State}.
     {ok, Req2} = cowboy_req:reply(200,

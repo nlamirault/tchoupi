@@ -23,6 +23,7 @@
                   kernel,
                   stdlib,
                   jsx,
+                  lager,
                   cowboy
                  ]},
   {env, [
