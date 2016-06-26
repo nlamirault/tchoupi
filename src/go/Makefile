@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# Copyright (C) 2014-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,93 +12,85 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-APP="tchoupi"
-EXE="bin/tchoupi"
+APP = tchoupi
 
 SHELL = /bin/bash
 
 DIR = $(shell pwd)
 
-GB = gb
+GO = go
+GLIDE = glide
 
 NO_COLOR=\033[0m
 OK_COLOR=\033[32;01m
 ERROR_COLOR=\033[31;01m
 WARN_COLOR=\033[33;01m
 
-SRC=src/github.com/nlamirault/tchoupi
+MAKE_COLOR=\033[33;01m%-20s\033[0m
 
+MAIN = github.com/nlamirault/tchoupi
 SRCS = $(shell git ls-files '*.go' | grep -v '^vendor/')
-PKGS = $(shell find src -type f -print0 | xargs -0 -n 1 dirname | sort -u|sed -e "s/^src\///g")
+PKGS = $(shell glide novendor)
 
 VERSION=$(shell \
-        grep "const Version" $(SRC)/version.go \
+        grep "const Version" version.go \
         |awk -F'=' '{print $$2}' \
         |sed -e "s/[^0-9.]//g" \
 	|sed -e "s/ //g")
 
-PACKAGE=$(APP)-$(VERSION)
-ARCHIVE=$(PACKAGE).tar
+.DEFAULT_GOAL := help
 
-all: help
-
+.PHONY: help
 help:
 	@echo -e "$(OK_COLOR)==== $(APP) [$(VERSION)] ====$(NO_COLOR)"
-	@echo -e "$(WARN_COLOR)init$(NO_COLOR)     :  Install requirements"
-	@echo -e "$(WARN_COLOR)build$(NO_COLOR)    :  Make all binaries"
-	@echo -e "$(WARN_COLOR)test$(NO_COLOR)     :  Launch unit tests"
-	@echo -e "$(WARN_COLOR)lint$(NO_COLOR)     :  Launch golint"
-	@echo -e "$(WARN_COLOR)vet$(NO_COLOR)      :  Launch go vet"
-	@echo -e "$(WARN_COLOR)coverage$(NO_COLOR) :  Launch code coverage"
-	@echo -e "$(WARN_COLOR)clean$(NO_COLOR)    :  Cleanup"
-	@echo -e "$(WARN_COLOR)release$(NO_COLOR)  :  Make a new release"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(MAKE_COLOR) : %s\n", $$1, $$2}'
 
-clean:
+clean: ## Cleanup
 	@echo -e "$(OK_COLOR)[$(APP)] Cleanup$(NO_COLOR)"
-	@rm -fr $(EXE) $(APP)-*.tar.gz pkg bin $(APP)_*
+	@rm -fr $(EXE) $(APP)-*.tar.gz
 
 .PHONY: init
-init:
+init: ## Install requirements
 	@echo -e "$(OK_COLOR)[$(APP)] Install requirements$(NO_COLOR)"
 	@go get -u github.com/golang/glog
-	@go get -u github.com/constabulary/gb/...
+	@go get -u github.com/Masterminds/glide
 	@go get -u github.com/golang/lint/golint
 	@go get -u github.com/kisielk/errcheck
 	@go get -u golang.org/x/tools/cmd/oracle
 
+.PHONY: deps
+deps: ## Install dependencies
+	@echo -e "$(OK_COLOR)[$(APP)] Update dependencies$(NO_COLOR)"
+	@glide up -u -s -v
+
 .PHONY: build
-build:
+build: ## Make binary
 	@echo -e "$(OK_COLOR)[$(APP)] Build $(NO_COLOR)"
-	@$(GB) build all
+	@$(GO) build .
 
 .PHONY: test
-test:
+test: ## Launch unit tests
 	@echo -e "$(OK_COLOR)[$(APP)] Launch unit tests $(NO_COLOR)"
-	@$(GB) test all -test.v=true
+	@$(GO) test -v $$(glide nv)
 
 .PHONY: lint
-lint:
+lint: ## Launch golint
 	@$(foreach file,$(SRCS),golint $(file) || exit;)
 
 .PHONY: vet
-vet:
-	@$(foreach file,$(SRCS),go vet $(file) || exit;)
+vet: ## Launch go vet
+	@$(foreach file,$(SRCS),$(GO) vet $(file) || exit;)
+
+.PHONY: errcheck
+errcheck: ## Launch go errcheck
+	@echo -e "$(OK_COLOR)[$(APP)] Go Errcheck $(NO_COLOR)"
+	@$(foreach pkg,$(PKGS),errcheck $(pkg) $(glide novendor) || exit;)
 
 .PHONY: coverage
-coverage:
-	@$(foreach pkg,$(PKGS),env GOPATH=`pwd`:`pwd`/vendor go test -cover $(pkg) || exit;)
-
-.PHONY: release
-release: clean build test lint vet
-	@echo -e "$(OK_COLOR)[$(APP)] Make archive $(VERSION) $(NO_COLOR)"
-	@rm -fr $(PACKAGE) && mkdir $(PACKAGE)
-	@cp -r $(EXE) $(PACKAGE)
-	@tar cf $(ARCHIVE) $(PACKAGE)
-	@gzip $(ARCHIVE)
-	@rm -fr $(PACKAGE)
-	@addons/github.sh $(VERSION)
+coverage: ## Launch code coverage
+	@$(foreach pkg,$(PKGS),$(GO) test -cover $(pkg) $(glide novendor) || exit;)
 
 # for goprojectile
 .PHONY: gopath
 gopath:
-	echo GOPATH=`pwd`:`pwd`/vendor
+	@echo GOPATH=`pwd`:`pwd`/vendor
