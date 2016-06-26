@@ -47,7 +47,7 @@ clean:
 .PHONY: init
 init:
 	@echo -e "$(OK_COLOR)[$(APP)] Initialisation de l'environnement$(NO_COLOR)"
-	test -d venv || virtualenv --python=/usr/bin/python3.4 venv
+	test -d venv || virtualenv --python=/usr/bin/python3 venv
 	. venv/bin/activate && \
 		pip install -r requirements.txt	 && \
 		pip install -r requirements-dev.txt
