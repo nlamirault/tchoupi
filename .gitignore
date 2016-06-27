@@ -3,7 +3,7 @@
 .cache/
 
 # python
-src/python/.venv/
+src/python/venv/
 src/python/tchoupi.egg-info/
 *.pyc
 .tox/
@@ -12,7 +12,9 @@ src/python/tchoupi.egg-info/
 src/haskell/log/
 
 # commonlisp
-src/commonlisp/.clenv/
+src/commonlisp/quicklisp/
+src/commonlisp/roswell/tchoupi
+src/commonlisp/qlfile.lock
 
 # clojure
 src/clojure/target/
@@ -30,3 +32,11 @@ src/erlang/_rel/
 src/erlang/erlang.d
 src/erlang/relx
 src/erlang/tchoupi.d
+
+# ocaml
+src/ocaml/_build
+src/ocaml/*.native
+src/ocaml/*.byte
+src/ocaml/*.docdir
+src/ocaml/setup.data
+src/ocaml/setup.log

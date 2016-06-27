@@ -1,6 +1,10 @@
 # Tchoupi OCaml
 
+## Required softwares
+
 * Install [OPam](http://opam.ocamlpro.com/), the package manager for [OCaml][]
+
+## Installation
 
 * Install requirements  :
 
@@ -28,3 +32,14 @@ If it fails :
 * Then :
 
         $ curl http://localhost:5000/version
+
+
+## Development
+
+* Update [Oasis][] configuration :
+
+        $ oasis setup.ml -setup-update dynamic
+
+* Unit tests:
+
+        $ make test

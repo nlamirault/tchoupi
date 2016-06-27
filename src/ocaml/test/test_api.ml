@@ -16,6 +16,14 @@ open Cohttp
 open Cohttp_lwt_unix
 
 
+let server =
+  App.empty
+  |> Tchoupi_routes.route_help
+  |> Tchoupi_routes.route_version
+
+let _ =
+  App.start server
+
 let make_request uri =
   Client.get (Uri.of_string uri) >>= fun (resp, body) ->
   let code = resp |> Response.status |> Code.code_of_status in

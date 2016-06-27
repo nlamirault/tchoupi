@@ -20,6 +20,10 @@ DIR = $(shell pwd)
 
 GO = go
 GLIDE = glide
+GO15VENDOREXPERIMENT = 1
+EXE = tchoupi
+
+DOCKER = docker
 
 NO_COLOR=\033[0m
 OK_COLOR=\033[32;01m
@@ -89,6 +93,22 @@ errcheck: ## Launch go errcheck
 .PHONY: coverage
 coverage: ## Launch code coverage
 	@$(foreach pkg,$(PKGS),$(GO) test -cover $(pkg) $(glide novendor) || exit;)
+
+.PHONY: docker-build
+docker-build:
+	@$(DOCKER) build -t tchoupi-go .
+
+.PHONY: docker-test
+docker-test:
+	@$(DOCKER) run --rm -it --name tchoupi-go-test tchoupi-go /bin/bash -c "cd /go/src/github.com/nlamirault/tchoupi/ && make test"
+
+.PHONY: docker-run
+docker-run:
+	@$(DOCKER) run --rm -it --name tchoupi-go-debug tchoupi-go tchoupi -d
+
+.PHONY: docker-exe
+docker-exe:
+	@$(DOCKER) run --rm -it -v `pwd`:/data/ --name tchoupi-go-debug tchoupi-go cp /usr/bin/tchoupi /data/tchoupi
 
 # for goprojectile
 .PHONY: gopath

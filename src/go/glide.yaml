@@ -1,0 +1,11 @@
+package: github.com/nlamirault/tchoupi
+import:
+- package: github.com/labstack/echo
+- package: github.com/dgrijalva/jwt-go
+- package: github.com/labstack/gommon
+  subpackages:
+  - bytes
+- package: github.com/mattn/go-colorable
+- package: github.com/mattn/go-isatty
+- package: github.com/valyala/fasttemplate
+- package: github.com/hashicorp/logutils
