@@ -1,4 +1,4 @@
-# Copyright (C) 2014, 2015  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# Copyright (C) 2014, 2015, 2016  Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,8 @@
 # limitations under the License.
 
 APP = tchoupi
+
+DOCKER = docker
 
 SHELL = /bin/bash
 
@@ -48,7 +50,7 @@ clean:
 .PHONY: init
 init:
 	@echo -e "$(OK_COLOR)[clacman] Install dependencies$(NO_COLOR)"
-	@curl -L https://raw.githubusercontent.com/snmsts/roswell/$(ROSWELL_BRANCH)/scripts/install-for-ci.sh | sh
+#	@curl -L https://raw.githubusercontent.com/snmsts/roswell/$(ROSWELL_BRANCH)/scripts/install-for-ci.sh | sh
 	@ros install qlot
 
 .PHONY: deps
@@ -70,3 +72,15 @@ binary:
 run:
 	@echo -e "$(OK_COLOR)[$(APP)] Run$(NO_COLOR)"
 	@clackup src/app.lisp
+
+.PHONY: docker-build
+docker-build:
+	@$(DOCKER) build -t tchoupi-cl .
+
+.PHONY: docker-test
+docker-test:
+	@$(DOCKER) run --rm -it --name tchoupi-cl-test tchoupi-cl /bin/bash -c "cd /opt/tchoupi/ && make init && /root/.roswell/bin/qlot install :tchoupi && /root/.roswell/bin/qlot exec run-prove tchoupi-test.asd"
+
+.PHONY: docker-run
+docker-run:
+	@$(DOCKER) run --rm -it --name tchoupi-cl-debug tchoupi-cl /bin/bash
