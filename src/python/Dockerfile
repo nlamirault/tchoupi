@@ -1,23 +1,28 @@
-FROM ubuntu:14.04
+# Copyright (C) 2014-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+FROM python:3.3.6
 MAINTAINER Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
-RUN apt-get update
-RUN apt-get install -y wget python git nginx supervisor
-RUN apt-get clean
-
 # Install PIP
-RUN wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py && python get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 
 RUN mkdir -p /opt
-ADD tchoupi /opt/tchoupi
+COPY . /opt/tchoupi
 
-# Nginx
-ADD ./nginx/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
 
-# Supervisord
-ADD ./supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+WORKDIR "/opt/tchoupi"
 
-# nginx
-EXPOSE 80
-
-CMD ["/usr/bin/supervisord"]
+CMD ["wsgi.py"]
