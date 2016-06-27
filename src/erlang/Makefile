@@ -16,6 +16,8 @@ APP="tchoupi"
 
 SHELL = /bin/bash
 
+DOCKER = docker
+
 REBAR = ./rebar3
 
 NO_COLOR=\033[0m
@@ -76,3 +78,15 @@ release: build
 clean:
 	@echo -e "$(OK_COLOR)[$(APP)] Clean environment$(NO_COLOR)"
 	@$(REBAR) clean && rm -f test/*.beam erl_crash.dump
+
+.PHONY: docker-build
+docker-build:
+	@$(DOCKER) build -t tchoupi-erlang .
+
+.PHONY: docker-test
+docker-test:
+	@$(DOCKER) run --rm -it --name tchoupi-erlang-test tchoupi-erlang /bin/bash -c "cd /opt/tchoupi/ && DEBUG=1 make build test"
+
+.PHONY: docker-run
+docker-run:
+	@$(DOCKER) run --rm -it --name tchoupi-erlang-debug tchoupi-erlang /bin/bash -c "cd /opt/tchoupi/ && make build run"
