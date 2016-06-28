@@ -15,17 +15,5 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
-extern crate iron;
-extern crate router;
-extern crate rustc_serialize;
-
-// use iron::prelude::*;
-// use iron::status;
-
-mod tchoupi;
-
-use tchoupi::routes;
-
-fn main() {
-    iron::Iron::new(routes::routes()).http("localhost:8080").unwrap();
-}
+pub mod version_handler;
+pub mod routes;

@@ -15,17 +15,24 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
-extern crate iron;
-extern crate router;
-extern crate rustc_serialize;
-
 // use iron::prelude::*;
 // use iron::status;
+// use router::Router;
 
-mod tchoupi;
+use rustc_serialize::json;
+use iron::status;
+use iron::IronResult;
+use iron::Request;
+use iron::Response;
 
-use tchoupi::routes;
+#[derive(RustcDecodable, RustcEncodable, Debug)]
+struct Version {
+    version: String,
+}
 
-fn main() {
-    iron::Iron::new(routes::routes()).http("localhost:8080").unwrap();
+
+pub fn get_version(_: &mut Request) -> IronResult<Response> {
+    let version = Version { version: "1".to_string() };
+    let payload = json::encode(&version).unwrap();
+    Ok(Response::with((status::Ok, payload)))
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2015  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+// Copyright (C) 2015, 2016  Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,8 +15,6 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
-extern crate tchoupi;
-
-#[test]
-fn it_works() {
-}
+extern crate iron;
+extern crate router;
+extern crate rustc_serialize;

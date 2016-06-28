@@ -15,17 +15,24 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
-extern crate iron;
-extern crate router;
-extern crate rustc_serialize;
-
 // use iron::prelude::*;
-// use iron::status;
+use iron::status;
+use iron::Request;
+use iron::Response;
+use iron::IronResult;
+use router::Router;
+// use rustc_serialize::json;
 
-mod tchoupi;
+use super::version_handler;
 
-use tchoupi::routes;
+pub fn routes() -> Router {
+    let mut router = Router::new();
+    router.get("/", welcome);
+    router.get("/api/version", version_handler::get_version);
+    return router;
+}
 
-fn main() {
-    iron::Iron::new(routes::routes()).http("localhost:8080").unwrap();
+
+fn welcome(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, "Welcome to Tchoupi.")))
 }

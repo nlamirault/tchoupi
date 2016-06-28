@@ -1,4 +1,4 @@
-# Copyright (C) 2015, 2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# Copyright (C) 2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,17 +51,18 @@ build:
 	@echo -e "$(OK_COLOR)[$(APP)] Build $(NO_COLOR)"
 	@$(CARGO) build
 
+.PHONY: run
+build:
+	@echo -e "$(OK_COLOR)[$(APP)] Build $(NO_COLOR)"
+	@$(CARGO) run
+
 .PHONY: release
 release:
 	@echo -e "$(OK_COLOR)[$(APP)] Build $(NO_COLOR)"
 	@$(CARGO) build --release
 
-.PHONY: run
-run:
-	@echo -e "$(OK_COLOR)[$(APP)] Run $(NO_COLOR)"
-	@$(CARGO) run
-
-.PHONY: test
-test:
-	@echo -e "$(OK_COLOR)[$(APP)] Launch unit tests $(NO_COLOR)"
-	@$(GB) test all -test.v=true
+.PHONY: binaries
+binaries:
+	@echo -e "$(OK_COLOR)[$(APP)] Binaries $(NO_COLOR)"
+	@$(CARGO) build --release --target x86_64-unknown-linux-gnu
+	@$(CARGO) build --release --target x86_64-apple-darwin --verbose
