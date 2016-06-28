@@ -15,6 +15,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
+extern crate env_logger;
 extern crate iron;
 extern crate router;
 extern crate rustc_serialize;

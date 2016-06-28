@@ -52,7 +52,7 @@ build:
 	@$(CARGO) build
 
 .PHONY: run
-build:
+run:
 	@echo -e "$(OK_COLOR)[$(APP)] Build $(NO_COLOR)"
 	@$(CARGO) run
 

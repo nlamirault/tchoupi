@@ -29,10 +29,12 @@ pub fn routes() -> Router {
     let mut router = Router::new();
     router.get("/", welcome);
     router.get("/api/version", version_handler::get_version);
+    info!("Router configured");
     return router;
 }
 
 
 fn welcome(_: &mut Request) -> IronResult<Response> {
+    info!("Get homepage");
     Ok(Response::with((status::Ok, "Welcome to Tchoupi.")))
 }

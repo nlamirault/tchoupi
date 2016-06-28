@@ -15,6 +15,9 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 // 02110-1301, USA.
 
+#[macro_use]
+extern crate log;
+extern crate env_logger;
 extern crate iron;
 extern crate router;
 extern crate rustc_serialize;
@@ -27,5 +30,7 @@ mod tchoupi;
 use tchoupi::routes;
 
 fn main() {
+    env_logger::init().unwrap();
+    info!("Starting");
     iron::Iron::new(routes::routes()).http("localhost:8080").unwrap();
 }

@@ -32,6 +32,7 @@ struct Version {
 
 
 pub fn get_version(_: &mut Request) -> IronResult<Response> {
+    info!("Get API version");
     let version = Version { version: "1".to_string() };
     let payload = json::encode(&version).unwrap();
     Ok(Response::with((status::Ok, payload)))
