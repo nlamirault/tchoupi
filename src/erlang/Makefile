@@ -69,6 +69,11 @@ test: build
 	@echo -e "$(OK_COLOR)[$(APP)] Testing$(NO_COLOR)"
 	@$(REBAR) as test ct
 
+.PHONY: lint
+lint:
+	@echo -e "$(OK_COLOR)[$(APP)] Erlang codeStyle$(NO_COLOR)"
+	@$(REBAR) lint
+
 .PHONY: release
 release: build
 	@echo -e "$(OK_COLOR)[$(APP)] Release application$(NO_COLOR)"
