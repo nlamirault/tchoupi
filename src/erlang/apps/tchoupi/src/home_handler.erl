@@ -1,4 +1,4 @@
-%% Copyright (C) 2014, 2015, 2016  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+%% Copyright (C) 2014-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -25,10 +25,11 @@ init(_, Req, Opts) ->
 
 
 handle(Req, State) ->
-    {ok, Req2} = cowboy_req:reply(200,
-                                  [{<<"content-type">>, <<"text/html">>}],
-                                  "<html><body><p>Welcome to Tchoupi.</p></body></html>",
-                                  Req),
+    {ok, Req2} = cowboy_req:reply(
+                   200,
+                   [{<<"content-type">>, <<"text/html">>}],
+                   "<html><body><p>Welcome to Tchoupi.</p></body></html>",
+                   Req),
     {ok, Req2, State}.
 
 

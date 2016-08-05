@@ -1,4 +1,4 @@
-%% Copyright (C) 2014, 2015, 2016  Nicolas Lamirault <nicolas.lamirault@gmail.com>
+%% Copyright (C) 2014-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -32,10 +32,11 @@ handle(Req, State) ->
     lager:info("Get version"),
     %% Body = jsx:encode([{<<"version">>,<<"1">>}]),
     %% {Body, Req, State}.
-    {ok, Req2} = cowboy_req:reply(200,
-                                  [{<<"content-type">>, <<"application/json">>}],
-                                  "{\"version\": \"1\"}",
-                                  Req),
+    {ok, Req2} = cowboy_req:reply(
+                   200,
+                   [{<<"content-type">>, <<"application/json">>}],
+                   "{\"version\": \"1\"}",
+                   Req),
     {ok, Req2, State}.
 
 
