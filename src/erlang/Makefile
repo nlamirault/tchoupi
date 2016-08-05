@@ -41,6 +41,7 @@ help:
 	@echo -e "$(WARN_COLOR)build$(NO_COLOR)    :  Compile project"
 	@echo -e "$(WARN_COLOR)run$(NO_COLOR)      :  Run application"
 	@echo -e "$(WARN_COLOR)test$(NO_COLOR)     :  Launch unit tests"
+	@echo -e "$(WARN_COLOR)lint$(NO_COLOR)     :  Check code style"
 
 .PHONY: init
 init:
