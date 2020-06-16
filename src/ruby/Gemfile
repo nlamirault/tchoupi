@@ -3,8 +3,8 @@ source 'http://rubygems.org'
 ruby '2.1.1'
 
 # Sinatra microframework
-gem 'sinatra', require: "sinatra/base"
-gem 'sinatra-contrib'
+gem 'sinatra', '>= 2.0.0', require: "sinatra/base"
+gem 'sinatra-contrib', '>= 2.0.0'
 gem 'multi_json'
 
 # Serve with unicorn
@@ -16,7 +16,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rack-test', '~> 0.6.1'
+  gem 'rack-test', '~> 0.6.2'
   gem 'mocha', '~> 0.14.0', require: false
   gem 'simplecov'
   gem 'coveralls'
